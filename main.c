@@ -27,10 +27,23 @@ int main(int argc, char **argv)
     struct dirent *de;
     DIR *dr;
     char *dir_nm = ".";
+    int R_flag = 0;
 
-    if (argc == 2)
-        dir_nm = argv[1];
-    
+    if (argc >= 2)
+    {
+        if(!ft_strcmp(argv[1],"-R"))
+        {
+            R_flag = 1;
+            ft_printf("RECURSIVE ACTIVATED\n");
+            dir_nm = argv[2];
+        }
+        else
+        {
+
+            dir_nm = argv[1];
+        }
+    }
+
     /*
     ** open directory descriptor 
     ** (similar to file descriptor, instead with directories)
@@ -39,7 +52,7 @@ int main(int argc, char **argv)
     if (dr == NULL)
     {
         // IMPORTANT: go to var_len in ft_printf, to check how to free any leaks with str and ints and format
-        ft_printf("ft_ls: %s: No such file or directory", dir_nm);
+        ft_printf("ft_ls: %s: %s\n", dir_nm, strerror(errno));
         return (0);
     }
 
