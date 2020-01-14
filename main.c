@@ -12,21 +12,33 @@
 // modified object to the oldest modified object
 
 // start with -R at the beggining of all the flags
+
+// using ls with the -R flag
+// display the files and directories of the current directory
+// from the directory 1 found, use the ls function again
+// to display files and directories of the directory 1
+// 
+
 int main(int argc, char **argv)
 {
-
-    /* Pointer for directory entry */
-    char *dir_nm = ".";
+    /*
+    ** Pointer for directory entry
+    */
     struct dirent *de;
     DIR *dr;
+    char *dir_nm = ".";
 
     if (argc == 2)
         dir_nm = argv[1];
-
-
-    dr = opendir(dir_nm); //open directory descriptor (similar to file descriptor, instead with directories)
+    
+    /*
+    ** open directory descriptor 
+    ** (similar to file descriptor, instead with directories)
+    */
+    dr = opendir(dir_nm);
     if (dr == NULL)
     {
+        // IMPORTANT: go to var_len in ft_printf, to check how to free any leaks with str and ints and format
         ft_printf("ft_ls: %s: No such file or directory", dir_nm);
         return (0);
     }
@@ -38,8 +50,3 @@ int main(int argc, char **argv)
     return (0);
 }
 
-// using ls with the -R flag
-// display the files and directories of the current directory
-// from the directory 1 found, use the ls function again
-// to display files and directories of the directory 1
-// 
