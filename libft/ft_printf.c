@@ -17,8 +17,10 @@ int		var_len(char *str, int *i, va_list args)
 	int		sum;
 	char	*tstr;
 	t_flags	*st_flag;
+	int flag;
 
 	sum = 0;
+	flag = 0;
 	if ((st_flag = malloc(sizeof(t_flags))) == NULL)
 		return (0);
 	set_fflags(str, &(*i), &st_flag);
@@ -30,9 +32,11 @@ int		var_len(char *str, int *i, va_list args)
 		tstr = format_str(tstr, str[*i], st_flag);
 		ft_putstr(tstr);
 		sum = sum + (ft_strlen(tstr));
+		flag = 1;
 	}
-	free(st_flag);
-	free(tstr);
+	// free(st_flag);
+	// if(flag == 1)
+		// free(tstr);
 	return (sum);
 }
 
