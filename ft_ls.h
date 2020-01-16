@@ -15,6 +15,14 @@
 // from unistd.h readlink
 
 // exit()
+typedef struct s_app
+{
+	/*
+	** {"-l","-R","-a","-r","-t"}
+	*/
 
+	int flag_ch[5];
+	int hi_len;
+}		t_app;
 
 #endif

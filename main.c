@@ -19,76 +19,98 @@
 // to display files and directories of the directory 1
 // 
 
-// int ft_ls(struct dirent *de, DIR *dr)
-// {
 
-// }
 
 // int flag_check_ls(char **av)
 // {
 
 // }
-#include <stdio.h>
-int main(int ac, char **av)
+
+// int main(int ac, char **av)
+// {
+//     /*
+//     ** window/terminal size structure. 
+//     ** The winsize is accessed from the kernel
+//     */
+
+//     struct winsize w;
+
+//     /*
+//     ** 
+//     */
+//     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+
+//     ft_printf("lines %d\n", w.ws_row);
+//     ft_printf("columns %d\n", w.ws_col);
+//     return 0;
+// }
+
+int ft_ls(t_app **app,struct dirent *de, DIR *dr)
 {
-    /*
-    ** window/terminal size structure. 
-    ** The winsize is accessed from the kernel
-    */
+    char *str;
+    int len;
 
-    struct winsize w;
-
-    /*
-    ** 
-    */
-    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-
-    printf("lines %d\n", w.ws_row);
-    printf("columns %d\n", w.ws_col);
+    len = 0;
+    str = ft_strnew(1);
+    str[0] = '\0';
+    while ((de = readdir(dr)) != NULL)
+    {
+        //move this to output list
+        // str = de->d_name;
+        if('.' != de->d_name[0])
+        {
+            if((*app)->hi_len < (len = ft_strlen(de->d_name)))
+            {
+                (*app)->hi_len = len;
+                ft_printf("new len is %d\n", len);
+            }
+            str = ft_strjoin(de->d_name, str);
+            str = ft_strjoin(" ", str);
+        }
+    }
+    ft_printf("%s\n", str);
     return 0;
 }
 
-// int main(int argc, char **argv)
-// {
-//     /*
-//     ** Pointer for directory entry
-//     */
-//     struct dirent *de;
-//     DIR *dr;
-//     char *dir_nm = ".";
-//     int R_flag = 0;
+int main(int argc, char **argv)
+{
+    /*
+    ** Pointer for directory entry
+    */
+    struct dirent *de;
+    t_app *app;
+    DIR *dr;
+    char *dir_nm = ".";
+    int R_flag = 0;
+    app = malloc(sizeof(t_app));
+    app->hi_len = 0;
+    if (argc >= 2)
+    {
+        if(!ft_strcmp(argv[1],"-R"))
+        {
+            R_flag = 1;
+            ft_printf("RECURSIVE ACTIVATED\n");
+            dir_nm = argv[2];
+        }
+        else
+        {
 
-//     if (argc >= 2)
-//     {
-//         if(!ft_strcmp(argv[1],"-R"))
-//         {
-//             R_flag = 1;
-//             ft_printf("RECURSIVE ACTIVATED\n");
-//             dir_nm = argv[2];
-//         }
-//         else
-//         {
+            dir_nm = argv[1];
+        }
+    }
 
-//             dir_nm = argv[1];
-//         }
-//     }
-
-//     /*
-//     ** open directory descriptor 
-//     ** (similar to file descriptor, instead with directories)
-//     */
-//     dr = opendir(dir_nm);
-//     if (dr == NULL)
-//     {
-//         // IMPORTANT: go to var_len in ft_printf, to check how to free any leaks with str and ints and format
-//         ft_printf("ft_ls: %s: %s\n", dir_nm, strerror(errno));
-//         return (0);
-//     }
-//     //
-//     while ((de = readdir(dr)) != NULL)
-//     {
-//         ft_printf("%s\n", de->d_name);
-//     }
-//     return (0);
-// }
+    /*
+    ** open directory descriptor 
+    ** (similar to file descriptor, instead with directories)
+    */
+    dr = opendir(dir_nm);
+    if (dr == NULL)
+    {
+        // IMPORTANT: go to var_len in ft_printf, to check how to free any leaks with str and ints and format
+        ft_printf("ft_ls: %s: %s\n", dir_nm, strerror(errno));
+        return (0);
+    }
+    ft_ls(&app ,de, dr);
+    return (0);
+}
 
