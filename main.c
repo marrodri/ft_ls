@@ -62,6 +62,8 @@ int ft_ls(t_app **app,struct dirent *de, DIR *dr)
     int len;
     int check;
     char **words;
+
+
     check = 0;
     len = 0;
     str = ft_strnew(1);
@@ -118,8 +120,9 @@ int main(int argc, char **argv)
 
     /*
     ** open directory descriptor 
-    ** (similar to file descriptor, instead with directories)
+    ** (simliar to file descriptor, instead with directories)
     */
+
     dr = opendir(dir_nm);
     if (dr == NULL)
     {
