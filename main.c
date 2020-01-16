@@ -49,17 +49,17 @@ int ft_ls(t_app **app,struct dirent *de, DIR *dr)
 {
     char *str;
     int len;
-
+    int check;
+    char **words;
+    check = 0;
     len = 0;
     str = ft_strnew(1);
-    str[0] = '\0';
     while ((de = readdir(dr)) != NULL)
     {
         //move this to output list
-        // str = de->d_name;
-        if('.' != de->d_name[0])
+        if ('.' != de->d_name[0])
         {
-            if((*app)->hi_len < (len = ft_strlen(de->d_name)))
+            if ((*app)->hi_len < (len = ft_strlen(de->d_name)))
             {
                 (*app)->hi_len = len;
                 ft_printf("new len is %d\n", len);
@@ -68,8 +68,24 @@ int ft_ls(t_app **app,struct dirent *de, DIR *dr)
             str = ft_strjoin(" ", str);
         }
     }
+
     ft_printf("%s\n", str);
-    return 0;
+    words = ft_strsplit(str, ' ');
+    int i = 0;
+    while (words[i])
+    {
+        ft_printf("word is |%s|\n", words[i]);
+        i++;
+    }
+    words = ft_sortwords(words, is_rsorted);
+    ft_printf("after sorting\n");
+    i =0;
+    while (words[i])
+    {
+        ft_printf("word is |%s|\n", words[i]);
+        i++;
+    }
+    return (0);
 }
 
 int main(int argc, char **argv)
@@ -94,7 +110,6 @@ int main(int argc, char **argv)
         }
         else
         {
-
             dir_nm = argv[1];
         }
     }

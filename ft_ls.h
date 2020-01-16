@@ -25,4 +25,7 @@ typedef struct s_app
 	int hi_len;
 }		t_app;
 
+char **ft_sortwords(char **words, int (*f)(char *a, char *b));
+int	is_rsorted(char *a, char *b);
+
 #endif
