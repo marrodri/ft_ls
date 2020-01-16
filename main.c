@@ -45,6 +45,17 @@
 //     return 0;
 // }
 
+void ls_output(t_app **app, char **words)
+{
+    int i = 0;
+    while (words[i])
+    {
+        char *str = "%-15s";
+        ft_printf(str, words[i]);
+        i++;
+    }
+}
+
 int ft_ls(t_app **app,struct dirent *de, DIR *dr)
 {
     char *str;
@@ -68,23 +79,9 @@ int ft_ls(t_app **app,struct dirent *de, DIR *dr)
             str = ft_strjoin(" ", str);
         }
     }
-
-    ft_printf("%s\n", str);
     words = ft_strsplit(str, ' ');
-    int i = 0;
-    while (words[i])
-    {
-        ft_printf("word is |%s|\n", words[i]);
-        i++;
-    }
     words = ft_sortwords(words, is_rsorted);
-    ft_printf("after sorting\n");
-    i =0;
-    while (words[i])
-    {
-        ft_printf("word is |%s|\n", words[i]);
-        i++;
-    }
+    ls_output(app, words);
     return (0);
 }
 
@@ -96,10 +93,15 @@ int main(int argc, char **argv)
     struct dirent *de;
     t_app *app;
     DIR *dr;
+    struct winsize w;
+
+
     char *dir_nm = ".";
     int R_flag = 0;
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
     app = malloc(sizeof(t_app));
     app->hi_len = 0;
+    app->win_col = w.ws_col;
     if (argc >= 2)
     {
         if(!ft_strcmp(argv[1],"-R"))
