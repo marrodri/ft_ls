@@ -12,6 +12,8 @@
 
 #include "ft_printf.h"
 
+// check leaks here, move all printf files
+
 int		var_len(char *str, int *i, va_list args)
 {
 	int		sum;
@@ -34,9 +36,9 @@ int		var_len(char *str, int *i, va_list args)
 		sum = sum + (ft_strlen(tstr));
 		flag = 1;
 	}
-	// free(st_flag);
-	// if(flag == 1)
-		// free(tstr);
+	free(tstr);
+	free(st_flag);
+	// if (flag == 1)
 	return (sum);
 }
 
