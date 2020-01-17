@@ -1,9 +1,27 @@
 
 #include "ft_ls.h"
 
-void print_in_tree(t_tree *tree)
+void print_inorder_tree(t_node *curr)
 {
-
+	if(!curr->left && !curr->right)
+	{
+		ft_printf("%s\n", curr->data);
+		return ;
+	}
+	else
+	{
+		if(curr->left)
+		{
+			print_inorder_tree(curr->left); 
+		}
+		// print for middle node;
+		ft_printf("%s\n", curr->data);
+		if(curr->right)
+		{
+			print_inorder_tree(curr->right); 
+		}
+		return ;
+	}
 }
 
 t_node *addnode_tree(t_node *curr, t_node *node)
@@ -47,7 +65,7 @@ t_node *new_node(char *file_name)
 
 int main()
 {
-	char *a = "hello";
+	char *a = "output.txt";
 	char *b = "test_output.txt";
 	char *c = "libft";
 	char *d = "ans_output.txt";
@@ -67,11 +85,15 @@ int main()
 	t_node *n8 = new_node(h);
 	init_tree(&tree, n1);
 	tree->root = addnode_tree(tree->root, n2);
+	tree->root = addnode_tree(tree->root, n3);
 	tree->root = addnode_tree(tree->root, n4);
+	tree->root = addnode_tree(tree->root, n5);
+	tree->root = addnode_tree(tree->root, n6);
+	tree->root = addnode_tree(tree->root, n7);
+	tree->root = addnode_tree(tree->root, n8);
 
-	ft_printf("tree root is %s\n", tree->root->data);
-
-	ft_printf("tree left is %s\n", tree->root->left->data);
-	ft_printf("tree right is %s\n", tree->root->right->data);
-
+	
+	print_inorder_tree(tree->root);
+	// system("leaks a.out");
+	return 0;
 }
