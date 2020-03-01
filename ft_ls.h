@@ -32,8 +32,9 @@ typedef struct	s_app
 {
 	int flag_ch[5];
 	int hi_len;
-	int win_col;
-	int win_lines;
+	int win_col; //columns
+	int win_lines; //rows
+	char *dir_name;
 }		t_app;
 
 char **ft_sortwords(char **words, int (*f)(char *a, char *b));

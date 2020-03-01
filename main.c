@@ -56,12 +56,13 @@ void ls_output(t_app **app, char **words)
     }
 }
 
-int ft_ls(t_app **app,struct dirent *de, DIR *dr)
+int ft_ls(t_app **app, struct dirent *de, DIR *dr)
 {
     char *str;
     int len;
     int check;
     char **words;
+    t_tree binary_tree;
 
 
     check = 0;
@@ -87,23 +88,30 @@ int ft_ls(t_app **app,struct dirent *de, DIR *dr)
     return (0);
 }
 
+void app_init(t_app *app)
+{
+    struct winsize w;
+    // get the window size for output
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+    app->hi_len = 0;
+    app->win_col = w.ws_col;
+    app->dir_name = ".";
+}
+
 int main(int argc, char **argv)
 {
     /*
     ** Pointer for directory entry
     */
     struct dirent *de;
-    t_app *app;
     DIR *dr;
-    struct winsize w;
+    t_app app;
 
 
-    char *dir_nm = ".";
+    // char *dir_nm = ".";
     int R_flag = 0;
-    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-    app = malloc(sizeof(t_app));
-    app->hi_len = 0;
-    app->win_col = w.ws_col;
+    // app = malloc(sizeof(t_app));
+    app_init(&app);
     if (argc >= 2)
     {
         if(!ft_strcmp(argv[1],"-R"))
