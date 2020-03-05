@@ -16,16 +16,16 @@
 
 // exit()
 
-typedef struct	s_node
+typedef struct	s_tree_node
 {
-	char		*data;
-	struct s_node	*left;
-	struct s_node	*right;
-}				t_node;
+	char				*data;
+	struct s_tree_node	*left;
+	struct s_tree_node	*right;
+}				t_tree_node;
 
 typedef	struct	s_tree
 {
-	struct s_node *root;
+	struct s_tree_node	*root;
 }				t_tree;
 
 typedef struct	s_app
@@ -34,10 +34,36 @@ typedef struct	s_app
 	int hi_len;
 	int win_col; //columns
 	int win_lines; //rows
-	char *dir_name;
+	char *cur_direct;
+	// t_tree *directories;
 }		t_app;
 
-char **ft_sortwords(char **words, int (*f)(char *a, char *b));
-int	is_rsorted(char *a, char *b);
-int	is_regular_file(const char *file);
+
+/*
+** main functions-------------------------------------------------------
+*/
+
+
+
+/*
+** checkers-------------------------------------------------------
+*/
+
+int			is_rsorted(char *a, char *b);
+int			is_regular_file(const char *file);
+
+/*
+** sorting functions------------------------------------------------
+*/
+
+char		**ft_sortwords(char **words, int (*f)(char *a, char *b));
+
+/*
+** Binary Tree-------------------------------------------------------
+*/
+
+void		init_tree(t_tree **tree, t_tree_node *node);
+t_tree_node *new_node(char *file_name);
+t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node);
+void		print_inorder_tree(t_tree_node *curr);
 #endif
