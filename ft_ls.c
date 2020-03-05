@@ -64,18 +64,29 @@ void add_direct_to_tree(t_tree **dir_tree, char *cur_direct, struct dirent *dir_
 
 
 
-int		ft_ls(t_app *app, DIR *dir_stream, char *cur_direct)
+int		ft_ls(t_app *app, char *cur_direct)
 {
 	int len;
 	struct dirent   *dir_entry; //directory entry
 	t_tree *ls_tree;
 	t_tree *dir_tree;
+	t_list *dir_list;
+	DIR		*dir_stream;
 	char *append_direct;
 
 	len = 0;
 	app->hi_len = 0;
 	ls_tree = NULL;
 	dir_tree = NULL;
+	dir_stream = opendir(cur_direct);
+	dir_list = 0;
+	if (dir_stream == NULL)
+	{
+		// IMPORTANT: go to var_len in ft_printf, to check how to free any leaks with str and ints and format
+		ft_printf("error\n");
+        ft_printf("ft_ls: %s: %s\n", cur_direct, strerror(errno));
+		return (0);
+	}
 	while ((dir_entry = readdir(dir_stream)) != NULL)
 	{
 		// move this to output list
@@ -94,7 +105,10 @@ int		ft_ls(t_app *app, DIR *dir_stream, char *cur_direct)
 	closedir(dir_stream);
 	// words = ft_sortwords(words, is_rsorted);
 	// ls_output(app, words);
-	if(app->recursive)
+	print_list(dir_list);
+	binary_tree_to_list(dir_tree->root, &dir_list);
+	print_list(dir_list);
+	if (app->recursive)
 	{
 		// while()
 		// {
@@ -103,5 +117,13 @@ int		ft_ls(t_app *app, DIR *dir_stream, char *cur_direct)
 			print_inorder_tree(dir_tree->root);
 		// }
 	}
-	return (0);
+
+	/*
+	** NOTE: everything is not leaking at this point so every memory is still
+	** reachable
+	*/
+
+	free_binary_tree(dir_tree->root);
+	free_binary_tree(ls_tree->root);
+	return (1);
 }

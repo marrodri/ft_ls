@@ -24,7 +24,10 @@
 
 typedef struct	s_tree_node
 {
+	void				*parent;
 	void				*data;
+	int					use_free_on_data;
+	int					node_already_checked;
 	struct s_tree_node	*left;
 	struct s_tree_node	*right;
 }				t_tree_node;
@@ -60,7 +63,7 @@ typedef struct	s_app
 ** main functions-------------------------------------------------------
 */
 
-int		ft_ls(t_app *app, DIR *dir_stream, char *cur_direct);
+int		ft_ls(t_app *app, char *cur_direct);
 int		recursive_ls(t_app *app);
 
 
@@ -86,4 +89,7 @@ void		init_tree(t_tree **tree, t_tree_node *node);
 t_tree_node *new_node(void *data);
 t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node);
 void		print_inorder_tree(t_tree_node *curr);
+void		free_binary_tree(t_tree_node *root);
+void		binary_tree_to_list(t_tree_node *root, t_list **alist);
+void		print_list(t_list *list);
 #endif

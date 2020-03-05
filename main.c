@@ -54,6 +54,7 @@ void app_init(t_app *app)
 	app->recursive = 0;
 	app->win_col = w.ws_col;
 	app->cur_direct = ".";
+	app->root_direct = ".";
 }
 
 int main(int argc, char **argv)
@@ -75,9 +76,11 @@ int main(int argc, char **argv)
 			app.recursive = 1;
 			ft_printf("RECURSIVE ACTIVATED\n");
 			app.cur_direct = argv[2];
+			app.root_direct = argv[2];
 		}
 		else
 		{
+			app.root_direct = argv[1];
 			app.cur_direct = argv[1];
 		}
 	}
@@ -87,14 +90,15 @@ int main(int argc, char **argv)
 	** (simliar to file descriptor, instead with directories)
 	*/
 
-	dir_stream = opendir(app.cur_direct);
-	if (dir_stream == NULL)
-	{
-		// IMPORTANT: go to var_len in ft_printf, to check how to free any leaks with str and ints and format
-		ft_printf("error\n");
-        ft_printf("ft_ls: %s: %s\n", app.cur_direct, strerror(errno));
-		return (0);
-	}
-	ft_ls(&app, dir_stream, app.cur_direct);
+	// dir_stream = opendir(app.cur_direct);
+	// if (dir_stream == NULL)
+	// {
+	// 	// IMPORTANT: go to var_len in ft_printf, to check how to free any leaks with str and ints and format
+	// 	ft_printf("error\n");
+    //     ft_printf("ft_ls: %s: %s\n", app.cur_direct, strerror(errno));
+	// 	return (0);
+	// }
+	ft_ls(&app, app.cur_direct);
+	// system("leaks a.out");
 	return (0);
 }

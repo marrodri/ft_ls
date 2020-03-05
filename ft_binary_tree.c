@@ -39,17 +39,42 @@ void print_inorder_tree(t_tree_node *curr)
 	}
 }
 
-//int ascii_order(){return (ft_strcmp(curr->data, node->data) > 0)}
+void free_binary_tree(t_tree_node *root)
+{
+	if (!(root)->left && !(root)->right)
+	{
+		// free((root)->data);
+		free(root);
+		root = NULL;
+		return ;
+	}
+	else if(root)
+	{
+		if ((root)->left)
+		{
+			free_binary_tree(root->left); 
+		}
+		if ((root)->right)
+		{
+			free_binary_tree(root->right); 
+		}
+		// free((*root)->data);
+		free(root);
+		root = NULL;
+	}
+	return ;
+}
+
 
 t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node)
 {
-	if(curr == NULL)
+	if (curr == NULL)
 	{
 		return (node);
 	}
 	else
 	{
-		if(ft_strcmp(curr->data, node->data) > 0)
+		if (ft_strcmp(curr->data, node->data) > 0)
 		{
 			curr->left = addnode_tree(curr->left, node);
 		}
@@ -76,6 +101,60 @@ t_tree_node *new_node(void *data)
 	new_node->left = NULL;
 	new_node->right = NULL;
 	return (new_node);
+}
+
+void print_list(t_list *list)
+{
+	ft_printf("list conts:\n");
+	if(!list)
+	{
+		ft_printf("NULL\n");
+		return ;
+	}
+	while(list)
+	{
+		ft_printf("%s\n", list->content);
+		list = list->next;
+	}
+
+}
+
+void set_tree_node_to_list(t_tree_node *tnode, t_list **alist)
+{
+	t_list *new_node;
+
+	new_node = ft_lstnew(tnode->data, 0);
+	if(!*alist)
+	{
+		(*alist) = new_node;
+	}
+	else
+	{
+		ft_lstaddend(alist, new_node);
+	}
+}
+
+
+void binary_tree_to_list(t_tree_node *root, t_list **alist)
+{
+	if(!root->left && !root->right)
+	{
+		set_tree_node_to_list(root, alist);
+		return;
+	}
+	else if(root)
+	{
+		if(root->left)
+		{
+			binary_tree_to_list(root->left, alist);
+		}
+		set_tree_node_to_list(root, alist);
+		if(root->right)
+		{
+			binary_tree_to_list(root->right, alist);
+		}
+	}
+	return ;
 }
 
 // NOTE THIS LEAKS IN PRINTF, FIND A WAY TO CLEAR ITS LEAKS
