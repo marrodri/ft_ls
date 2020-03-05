@@ -2,7 +2,7 @@
 
 #include "ft_ls.h"
 
-int recursive_list(t_app *app)
+int recursive_ls(t_app *app)
 {
 	// TODO ITERATE THROUGH THE LIST WITH RECURSIVE LIST
 	t_tree *list_tree;

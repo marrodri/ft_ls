@@ -45,54 +45,13 @@
 //     return 0;
 // }
 
-void	ls_output(t_app *app, char **words)
-{
-	int i = 0;
-	while (words[i])
-	{
-		char *str = "%-15s";
-		ft_printf(str, words[i]);
-		i++;
-	}
-}
-
-int		ft_ls(t_app *app, struct dirent *dir_entry, DIR *dir_stream)
-{
-	char *str;
-	int len;
-	int check;
-	char **words;
-	t_tree binary_tree;
-
-	check = 0;
-	len = 0;
-	str = ft_strnew(1);
-	while ((dir_entry = readdir(dir_stream)) != NULL)
-	{
-		//move this to output list
-		if ('.' != dir_entry->d_name[0])
-		{
-			if ((app)->hi_len < (len = ft_strlen(dir_entry->d_name)))
-			{
-				(app)->hi_len = len;
-				ft_printf("new len is %d\n", len);
-			}
-			str = ft_strjoin(dir_entry->d_name, str);
-			str = ft_strjoin(" ", str);
-		}
-	}
-	words = ft_strsplit(str, ' ');
-	words = ft_sortwords(words, is_rsorted);
-	ls_output(app, words);
-	return (0);
-}
-
 void app_init(t_app *app)
 {
 	struct winsize w;
 	// get the window size for output
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 	app->hi_len = 0;
+	app->recursive = 0;
 	app->win_col = w.ws_col;
 	app->cur_direct = ".";
 }
@@ -102,7 +61,7 @@ int main(int argc, char **argv)
 	/*
 	** Pointer for directory entry
 	*/
-	struct dirent   *dir_entry; //directory entry
+	// struct dirent   *dir_entry; //directory entry
 	DIR             *dir_stream; //directory stream
 	t_app           app;
 
@@ -113,7 +72,7 @@ int main(int argc, char **argv)
 	{
 		if(!ft_strcmp(argv[1],"-R"))
 		{
-			R_flag = 1;
+			app.recursive = 1;
 			ft_printf("RECURSIVE ACTIVATED\n");
 			app.cur_direct = argv[2];
 		}
@@ -136,6 +95,6 @@ int main(int argc, char **argv)
         ft_printf("ft_ls: %s: %s\n", app.cur_direct, strerror(errno));
 		return (0);
 	}
-	ft_ls(&app ,dir_entry, dir_stream);
+	ft_ls(&app, dir_stream, app.cur_direct);
 	return (0);
 }

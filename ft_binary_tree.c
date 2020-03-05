@@ -14,6 +14,11 @@
 
 void print_inorder_tree(t_tree_node *curr)
 {
+	if(!curr)
+	{
+		ft_printf("NULL\n");
+		return ;
+	}
 	if (!curr->left && !curr->right)
 	{
 		ft_printf("%s\n", curr->data);
@@ -33,6 +38,8 @@ void print_inorder_tree(t_tree_node *curr)
 		return ;
 	}
 }
+
+//int ascii_order(){return (ft_strcmp(curr->data, node->data) > 0)}
 
 t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node)
 {
@@ -60,12 +67,12 @@ void init_tree(t_tree **tree, t_tree_node *node)
 	(*tree)->root = node;
 }
 
-t_tree_node *new_node(char *file_name)
+t_tree_node *new_node(void *data)
 {
 	t_tree_node *new_node;
 
 	new_node = malloc(sizeof(t_tree_node));
-	new_node->data = file_name;
+	new_node->data = data;
 	new_node->left = NULL;
 	new_node->right = NULL;
 	return (new_node);
@@ -73,3 +80,37 @@ t_tree_node *new_node(char *file_name)
 
 // NOTE THIS LEAKS IN PRINTF, FIND A WAY TO CLEAR ITS LEAKS
 // 	ft_printf("%12s\n", "hello world", 213);
+
+// int main()
+// {
+// 	char *a = "output.txt";
+// 	char *b = "test_output.txt";
+// 	char *c = "libft";
+// 	char *d = "ans_output.txt";
+// 	char *e = "Main";
+// 	char *f = "ft_ls.h";
+// 	char *g = "main.c";
+// 	char *h = "a.out";
+
+// 	t_tree *tree;
+// 	t_tree_node *n1 = new_node(a);
+// 	t_tree_node *n2 = new_node(b);
+// 	t_tree_node *n3 = new_node(c);
+// 	t_tree_node *n4 = new_node(d);
+// 	t_tree_node *n5 = new_node(e);
+// 	t_tree_node *n6 = new_node(f);
+// 	t_tree_node *n7 = new_node(g);
+// 	t_tree_node *n8 = new_node(h);
+// 	init_tree(&tree, n1);
+// 	tree->root = addnode_tree(tree->root, n2);
+// 	tree->root = addnode_tree(tree->root, n3);
+// 	tree->root = addnode_tree(tree->root, n4);
+// 	tree->root = addnode_tree(tree->root, n5);
+// 	tree->root = addnode_tree(tree->root, n6);
+// 	tree->root = addnode_tree(tree->root, n7);
+// 	tree->root = addnode_tree(tree->root, n8);
+
+	
+// 	print_inorder_tree(tree->root);
+// 	return 0;
+// }

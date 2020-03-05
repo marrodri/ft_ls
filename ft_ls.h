@@ -16,9 +16,15 @@
 
 // exit()
 
+//	-l, more detailed output
+//  -R, recursive output
+//  -a, display hidden files, ._* files
+//  -r, reverse the list order
+//  -t, sorts by modification time, from the most current
+
 typedef struct	s_tree_node
 {
-	char				*data;
+	void				*data;
 	struct s_tree_node	*left;
 	struct s_tree_node	*right;
 }				t_tree_node;
@@ -28,13 +34,24 @@ typedef	struct	s_tree
 	struct s_tree_node	*root;
 }				t_tree;
 
+/*
+** flag_ch
+** 0 = R flag
+** 1 = a flag
+** 2 = l flag
+** 3 = r flag
+** 4 = t flag
+*/ 
+
 typedef struct	s_app
 {
 	int flag_ch[5];
+	int	recursive;
 	int hi_len;
 	int win_col; //columns
 	int win_lines; //rows
 	char *cur_direct;
+	char *root_direct;
 	// t_tree *directories;
 }		t_app;
 
@@ -42,6 +59,9 @@ typedef struct	s_app
 /*
 ** main functions-------------------------------------------------------
 */
+
+int		ft_ls(t_app *app, DIR *dir_stream, char *cur_direct);
+int		recursive_ls(t_app *app);
 
 
 
@@ -63,7 +83,7 @@ char		**ft_sortwords(char **words, int (*f)(char *a, char *b));
 */
 
 void		init_tree(t_tree **tree, t_tree_node *node);
-t_tree_node *new_node(char *file_name);
+t_tree_node *new_node(void *data);
 t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node);
 void		print_inorder_tree(t_tree_node *curr);
 #endif
