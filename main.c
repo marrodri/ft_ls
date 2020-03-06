@@ -57,6 +57,11 @@ void app_init(t_app *app)
 	app->root_direct = ".";
 }
 
+/*
+* TODO LATER:
+* FIX FT_PRINTF WHEN FREEING AND CLEAR ALL LEAKS AS POSIBLE
+*/
+
 int main(int argc, char **argv)
 {
 	/*
@@ -74,7 +79,7 @@ int main(int argc, char **argv)
 		if(!ft_strcmp(argv[1],"-R"))
 		{
 			app.recursive = 1;
-			ft_printf("RECURSIVE ACTIVATED\n");
+			printf("RECURSIVE ACTIVATED\n");
 			app.cur_direct = argv[2];
 			app.root_direct = argv[2];
 		}

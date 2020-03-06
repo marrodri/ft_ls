@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void const *content, size_t content_size)
+t_list	*ft_lstnew(void *content, size_t content_size)
 {
 	t_list	*new_node;
 	// void	*copy;
@@ -25,10 +25,6 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 	}
 	else
 	{
-		// copy = (void *)malloc((content_size) * sizeof(void));
-		// if (copy == NULL || new_node == NULL)
-		// 	return (NULL);
-		// ft_memcpy(copy, content, content_size);
 		new_node->content = content;
 		new_node->content_size = content_size;
 	}

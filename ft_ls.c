@@ -7,7 +7,7 @@ void	ls_output(t_app *app, char **words)
 	while (words[i])
 	{
 		char *str = "%-15s";
-		ft_printf(str, words[i]);
+		printf(str, words[i]);
 		i++;
 	}
 }
@@ -47,10 +47,10 @@ void add_direct_to_tree(t_tree **dir_tree, char *cur_direct, struct dirent *dir_
 	char *append_dir;
 
 	append_dir = append_directory(cur_direct, dir_entry->d_name);
-	ft_printf("cur_direct is |%s|\n", append_dir);
+	// printf("cur_direct is |%s|\n", append_dir);
 	if (is_directory(append_dir))
 	{
-		ft_printf("data is directory, setting to dir_tree\n");
+		// printf("data is directory, setting to dir_tree\n");
 		if (!*dir_tree)
 			init_tree(dir_tree, new_node(append_dir));
 		else
@@ -79,12 +79,12 @@ int		ft_ls(t_app *app, char *cur_direct)
 	ls_tree = NULL;
 	dir_tree = NULL;
 	dir_stream = opendir(cur_direct);
-	dir_list = 0;
+	dir_list = NULL;
 	if (dir_stream == NULL)
 	{
-		// IMPORTANT: go to var_len in ft_printf, to check how to free any leaks with str and ints and format
-		ft_printf("error\n");
-        ft_printf("ft_ls: %s: %s\n", cur_direct, strerror(errno));
+		// IMPORTANT: go to var_len in printf, to check how to free any leaks with str and ints and format
+		printf("error\n");
+        printf("ft_ls: %s: %s\n", cur_direct, strerror(errno));
 		return (0);
 	}
 	while ((dir_entry = readdir(dir_stream)) != NULL)
@@ -103,19 +103,20 @@ int		ft_ls(t_app *app, char *cur_direct)
 	}
 	print_inorder_tree(ls_tree->root);
 	closedir(dir_stream);
+	printf("\n");
 	// words = ft_sortwords(words, is_rsorted);
 	// ls_output(app, words);
-	print_list(dir_list);
-	binary_tree_to_list(dir_tree->root, &dir_list);
-	print_list(dir_list);
-	if (app->recursive)
+	// print_list(dir_list);
+	// print_list(dir_list);
+	if (app->recursive && dir_tree)
 	{
-		// while()
-		// {
-		ft_printf("\n FOLDERS ARE:\n");
-		if(dir_tree)
-			print_inorder_tree(dir_tree->root);
-		// }
+		binary_tree_to_list(dir_tree->root, &dir_list);
+		while(dir_list)
+		{
+			printf("%s:\n", dir_list->content);
+			ft_ls(app,dir_list->content);
+			dir_list = dir_list->next;
+		}
 	}
 
 	/*
@@ -123,7 +124,7 @@ int		ft_ls(t_app *app, char *cur_direct)
 	** reachable
 	*/
 
-	free_binary_tree(dir_tree->root);
-	free_binary_tree(ls_tree->root);
+	// free_binary_tree(dir_tree->root);
+	// free_binary_tree(ls_tree->root);
 	return (1);
 }

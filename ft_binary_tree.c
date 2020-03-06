@@ -16,27 +16,28 @@ void print_inorder_tree(t_tree_node *curr)
 {
 	if(!curr)
 	{
-		ft_printf("NULL\n");
+		printf("NULL\n");
 		return ;
 	}
 	if (!curr->left && !curr->right)
 	{
-		ft_printf("%s\n", curr->data);
+		printf("%s\n", curr->data);
 		return ;
 	}
-	else
+	else if(curr)
 	{
 		if (curr->left)
 		{
 			print_inorder_tree(curr->left); 
 		}
-		ft_printf("%s\n", curr->data);
+		if(curr)
+			printf("%s\n", curr->data);
 		if(curr->right)
 		{
 			print_inorder_tree(curr->right); 
 		}
-		return ;
 	}
+		return ;
 }
 
 void free_binary_tree(t_tree_node *root)
@@ -105,15 +106,15 @@ t_tree_node *new_node(void *data)
 
 void print_list(t_list *list)
 {
-	ft_printf("list conts:\n");
+	printf("list conts:\n");
 	if(!list)
 	{
-		ft_printf("NULL\n");
+		printf("NULL\n");
 		return ;
 	}
 	while(list)
 	{
-		ft_printf("%s\n", list->content);
+		printf("%s\n", list->content);
 		list = list->next;
 	}
 
@@ -124,12 +125,16 @@ void set_tree_node_to_list(t_tree_node *tnode, t_list **alist)
 	t_list *new_node;
 
 	new_node = ft_lstnew(tnode->data, 0);
+	// printf("new_node data is |%s|\n", new_node->content);
+	// printf("tnode data is |%s|\n", tnode->data);
 	if(!*alist)
 	{
+		// printf("current alist is null\n");
 		(*alist) = new_node;
 	}
 	else
 	{
+		// printf("adding list to end\n");
 		ft_lstaddend(alist, new_node);
 	}
 }
@@ -139,7 +144,9 @@ void binary_tree_to_list(t_tree_node *root, t_list **alist)
 {
 	if(!root->left && !root->right)
 	{
+		// printf("root cont is %s\n", root->data);
 		set_tree_node_to_list(root, alist);
+		// print_list(*alist);
 		return;
 	}
 	else if(root)
@@ -148,7 +155,9 @@ void binary_tree_to_list(t_tree_node *root, t_list **alist)
 		{
 			binary_tree_to_list(root->left, alist);
 		}
+		// printf("middle root cont is %s\n", root->data);
 		set_tree_node_to_list(root, alist);
+		// print_list(*alist);
 		if(root->right)
 		{
 			binary_tree_to_list(root->right, alist);
@@ -158,7 +167,7 @@ void binary_tree_to_list(t_tree_node *root, t_list **alist)
 }
 
 // NOTE THIS LEAKS IN PRINTF, FIND A WAY TO CLEAR ITS LEAKS
-// 	ft_printf("%12s\n", "hello world", 213);
+// 	printf("%12s\n", "hello world", 213);
 
 // int main()
 // {

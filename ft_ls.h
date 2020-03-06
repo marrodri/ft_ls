@@ -11,10 +11,15 @@
 # include <time.h> //time, ctime
 # include <errno.h> //perror, strerror
 # include <sys/ioctl.h> //BONUS for properling spacing the ft_ls as possible as the original ls output
+# include <stdio.h>
+
 # define FLAG_SZ 5
 // from unistd.h readlink
 
 // exit()
+
+
+
 
 //	-l, more detailed output
 //  -R, recursive output
