@@ -31,9 +31,10 @@ SRC = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c \
 	  ft_dec_to_oct.c ft_itoa_base.c ft_uitoa.c ft_llitoa_base.c \
 	  ft_strnewc.c ft_swap_charstr.c ft_ullitoa_base.c ft_strischar.c \
 	  ft_libaselen.c ft_lldeduct.c ft_power_of_lli.c ft_ldtoa.c \
-	  ft_printf.c format_str.c set_fflags.c field_man_flag.c char_form.c \
-	int_form.c set_form.c field_flags.c float_form.c prec_man_flag.c \
-	flag_checker.c ft_swap_endian.c ft_lstaddend.c ft_list_size.c \
+	  ft_printf.c ftptf_format_str.c ftptf_set_fflags.c ftptf_field_man_flag.c\
+	ftptf_char_form.c ftptf_int_form.c ftptf_set_form.c ftptf_field_flags.c\
+	ftptf_float_form.c ftptf_prec_man_flag.c \
+	ftptf_flag_checker.c ft_swap_endian.c ft_lstaddend.c ft_list_size.c \
 	ft_check_wrd_dup.c ft_arriszero.c ft_atol.c
 
 HDR = ./includes/

@@ -29,13 +29,13 @@ typedef struct	s_flags
 
 typedef char	*t_char_form(va_list args, t_flags *st_flag);
 int				ft_printf(char *str, ...);
-void			set_fflags(char *str, int *i, t_flags **st_flag);
+void			set_fflags(char *str, int *i, t_flags **st_flag, int *free_fflag);
 void			check_fi_flags(char f, t_flags *st_flag);
 void			check_field(char *str, int *i, t_flags *st_flag);
 void			check_prec(char *str, int *i, t_flags *st_flag);
 void			check_fo_flags(char f, t_flags *st_flag);
 void			ignore_case(t_flags *st_flag);
-char			*set_form(char f, va_list args, t_flags *st_flag);
+char			*set_form(char f, va_list args, t_flags *st_flag, int *free_tstr);
 int				check_form(char f);
 char			*c_form(va_list args, t_flags *st_flag);
 char			*percen_char(va_list args, t_flags *st_flag);
@@ -47,7 +47,7 @@ char			*uppx_form(va_list args, t_flags *st_flag);
 char			*o_form(va_list args, t_flags *st_flag);
 char			*u_form(va_list args, t_flags *st_flag);
 char			*f_form(va_list args, t_flags *st_flag);
-char			*format_str(char *str, char f, t_flags *st_flags);
+char			*format_str(char *str, char f, t_flags *st_flags, int *free_tstr);
 char			*zero_flag(char *fstr, t_flags *st_flag);
 char			*default_field(char *fstr, char f, t_flags *st_flag);
 char			*minus_flag(char *fstr, char f, t_flags *st_flag);

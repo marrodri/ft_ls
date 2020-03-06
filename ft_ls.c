@@ -103,7 +103,7 @@ int		ft_ls(t_app *app, char *cur_direct)
 	}
 	print_inorder_tree(ls_tree->root);
 	closedir(dir_stream);
-	printf("\n");
+	ft_printf("\n");
 	// words = ft_sortwords(words, is_rsorted);
 	// ls_output(app, words);
 	// print_list(dir_list);
@@ -111,20 +111,26 @@ int		ft_ls(t_app *app, char *cur_direct)
 	if (app->recursive && dir_tree)
 	{
 		binary_tree_to_list(dir_tree->root, &dir_list);
+		t_list *hold = dir_list;
 		while(dir_list)
 		{
-			printf("%s:\n", dir_list->content);
+			ft_printf("%s:\n", dir_list->content);
 			ft_ls(app,dir_list->content);
 			dir_list = dir_list->next;
 		}
+		free_binary_tree(dir_tree->root);
+		// while(hold)
+		// {
+
+		// }
+		
 	}
+	free_binary_tree(ls_tree->root);
 
 	/*
 	** NOTE: everything is not leaking at this point so every memory is still
 	** reachable
 	*/
 
-	// free_binary_tree(dir_tree->root);
-	// free_binary_tree(ls_tree->root);
 	return (1);
 }

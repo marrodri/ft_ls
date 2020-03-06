@@ -11,34 +11,39 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-// check leaks here, move all printf files
+#include "stdio.h"
+/*
+** check leaks here, move all printf files
+*/
 
 int		var_len(char *str, int *i, va_list args)
 {
 	int		sum;
 	char	*tstr;
 	t_flags	*st_flag;
-	int flag;
+	int		free_fflag;
+	int		free_tstr;
 
 	sum = 0;
-	flag = 0;
+	free_fflag = 0;
+	free_tstr = 0;
 	if ((st_flag = malloc(sizeof(t_flags))) == NULL)
 		return (0);
-	set_fflags(str, &(*i), &st_flag);
-	tstr = (set_form(str[*i], args, st_flag));
+	set_fflags(str, &(*i), &st_flag, &free_fflag);
+	tstr = (set_form(str[*i], args, st_flag, &free_tstr));
+	// printf("%d\n", free);
 	if (tstr != NULL)
 	{
 		if (tstr[0] == '\0' && str[*i] == 'c')
 			sum++;
-		tstr = format_str(tstr, str[*i], st_flag);
+		tstr = format_str(tstr, str[*i], st_flag, &free_tstr);
 		ft_putstr(tstr);
 		sum = sum + (ft_strlen(tstr));
-		flag = 1;
 	}
-	free(tstr);
-	free(st_flag);
-	// if (flag == 1)
+	// if (free_fflag == 1)
+		free(st_flag);
+	if (free_tstr == 1)
+		free(tstr);
 	return (sum);
 }
 

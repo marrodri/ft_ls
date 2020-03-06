@@ -79,7 +79,7 @@ int main(int argc, char **argv)
 		if(!ft_strcmp(argv[1],"-R"))
 		{
 			app.recursive = 1;
-			printf("RECURSIVE ACTIVATED\n");
+			// ft_printf("RECURSIVE ACTIVATED\n");
 			app.cur_direct = argv[2];
 			app.root_direct = argv[2];
 		}

@@ -16,12 +16,12 @@ void print_inorder_tree(t_tree_node *curr)
 {
 	if(!curr)
 	{
-		printf("NULL\n");
+		ft_printf("NULL\n");
 		return ;
 	}
 	if (!curr->left && !curr->right)
 	{
-		printf("%s\n", curr->data);
+		ft_printf("%s\n", curr->data);
 		return ;
 	}
 	else if(curr)
@@ -31,7 +31,7 @@ void print_inorder_tree(t_tree_node *curr)
 			print_inorder_tree(curr->left); 
 		}
 		if(curr)
-			printf("%s\n", curr->data);
+			ft_printf("%s\n", curr->data);
 		if(curr->right)
 		{
 			print_inorder_tree(curr->right); 
@@ -106,15 +106,15 @@ t_tree_node *new_node(void *data)
 
 void print_list(t_list *list)
 {
-	printf("list conts:\n");
+	ft_printf("list conts:\n");
 	if(!list)
 	{
-		printf("NULL\n");
+		ft_printf("NULL\n");
 		return ;
 	}
 	while(list)
 	{
-		printf("%s\n", list->content);
+		ft_printf("%s\n", list->content);
 		list = list->next;
 	}
 
