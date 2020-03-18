@@ -5,7 +5,8 @@
 // TODO recreate the ls function 
 // with 
 // -l, more detailed output
-//  -R, recursive output
+
+//  -R, recursive output //DONE
 //  -a, display hidden files, ._* files
 //  -r, reverse the list order
 //-t, sorts by modification time, from the most current

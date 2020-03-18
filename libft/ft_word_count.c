@@ -20,7 +20,7 @@ int		ft_word_count(char const *s, char c)
 	i = 0;
 	word = 0;
 	if (s == NULL)
-		return (int)(NULL);
+		return 0;
 	while (s[i])
 	{
 		if (s[i] == c && s[i + 1] != c && s[i + 1] != '\0')

@@ -45,10 +45,10 @@ void	ignore_case(t_flags *st_flag)
 
 void	set_fflags(char *str, int *i, t_flags **st_flag, int *free_fflag)
 {
-	int	pos;
+	//int	pos;
 	
 	(void)free_fflag;
-	pos = 0;
+	//pos = 0;
 	init_flags(*st_flag);
 	while ((check_form(str[*i])) == -1 && (!(str[*i] == 'l' ||
 		str[*i] == 'h' || str[*i] == 'L' || str[*i] == '.')) &&
