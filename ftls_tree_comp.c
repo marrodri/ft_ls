@@ -1,8 +1,6 @@
 
 #include "ft_ls.h"
 
-
-
 //default comparison
 int alphanum_comp(char *cur_str, char *node_str)
 {
@@ -10,9 +8,9 @@ int alphanum_comp(char *cur_str, char *node_str)
 }
 
 // r flag use this comp
-int rev_alphanum_comp()
+int rev_alphanum_comp(char *cur_str, char *node_str)
 {
-	return 0;
+	return (ft_strcmp(cur_str, node_str) < 0);
 }
 
 // t flag use this comp

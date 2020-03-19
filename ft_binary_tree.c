@@ -66,7 +66,7 @@ void free_binary_tree(t_tree_node *root)
 	return ;
 }
 
-
+//add comparison
 t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node)
 {
 	if (curr == NULL)
