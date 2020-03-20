@@ -68,9 +68,7 @@ typedef struct	s_app
 */
 
 int		ft_ls(t_app *app, char *cur_direct);
-int		recursive_ls(t_app *app);
-
-
+int 	check_active_option_ls(t_app *app, char **av);
 
 /*
 ** checkers-------------------------------------------------------
@@ -82,7 +80,7 @@ int			is_regular_file(const char *file);
 /*
 ** sorting functions------------------------------------------------
 */
-
+//it may be useless in the end
 char		**ft_sortwords(char **words, int (*f)(char *a, char *b));
 
 /*
@@ -97,11 +95,12 @@ int rev_alphanum_comp(t_dirent *d1, t_dirent *d2);
 */
 
 void		init_tree(t_tree **tree, t_tree_node *node);
-t_tree_node *new_node(void *data);
-t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node, int (*f)(t_dirent *d1, t_dirent *d2));
-// t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node);
+t_tree_node	*new_node(void *data);
+t_tree_node	*addnode_tree(t_tree_node *curr, t_tree_node *node,
+		int (*f)(t_dirent *d1, t_dirent *d2));
 void		print_inorder_tree(t_tree_node *curr);
 void		free_binary_tree(t_tree_node *root);
 void		binary_tree_to_list(t_tree_node *root, t_list **alist);
 void		print_list(t_list *list);
+
 #endif

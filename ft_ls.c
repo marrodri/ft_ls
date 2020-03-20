@@ -16,13 +16,10 @@ void add_data_to_tree(t_tree **ls_tree, t_dirent *dir_entry, int (*f)(t_dirent *
 {
 	if(!*ls_tree)
 	{
-		
-		// init_tree(ls_tree, new_node(dir_entry->d_name));
 		init_tree(ls_tree, new_node(dir_entry));
 	}
 	else
 	{
-		// addnode_tree((*ls_tree)->root, new_node(dir_entry->d_name));
 		addnode_tree((*ls_tree)->root, new_node(dir_entry), f);
 	}
 }
@@ -47,7 +44,6 @@ int		is_directory(const char *path)
 	return S_ISDIR(stat_buf.st_mode);
 }
 
-// t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node, int (*f)(t_dirent *d1, t_dirent *d2))
 void add_direct_to_tree(t_tree **dir_tree, char *cur_direct, t_dirent *dir_entry, int (*f)(t_dirent *d1, t_dirent *d2))
 {
 	char *append_dir;
@@ -75,7 +71,7 @@ int		ft_ls(t_app *app, char *cur_direct)
 	t_tree		*ls_tree;
 	t_tree		*dir_tree;
 	t_list		*dir_list;
-	DIR			*dir_stream;
+	DIR			*dir_stream; //directory stream
 
 	len = 0;
 	app->hi_len = 0;

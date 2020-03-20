@@ -22,10 +22,7 @@
 
 
 
-// int flag_check_ls(char **av)
-// {
 
-// }
 
 // int main(int ac, char **av)
 // {
@@ -48,8 +45,11 @@
 
 void app_init(t_app *app)
 {
-	struct winsize w;
+	struct	winsize w;
+	int		i;
+
 	// get the window size for output
+	i = 0;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 	app->hi_len = 0;
 	app->recursive = 0;
@@ -57,6 +57,11 @@ void app_init(t_app *app)
 	app->win_col = w.ws_col;
 	app->cur_direct = ".";
 	app->root_direct = ".";
+	while (i < 5)
+	{
+		app->flag_ch[i] = 0;
+		i++;
+	}
 }
 
 /*
@@ -69,12 +74,8 @@ int main(int argc, char **argv)
 	/*
 	** Pointer for directory entry
 	*/
-	// struct dirent   *dir_entry; //directory entry
-	DIR             *dir_stream; //directory stream
 	t_app           app;
 
-
-	int R_flag = 0;
 	app_init(&app);
 	if (argc >= 2)
 	{
