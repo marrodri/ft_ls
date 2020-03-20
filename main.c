@@ -59,7 +59,7 @@ void app_init(t_app *app)
 	app->root_direct = ".";
 	while (i < 5)
 	{
-		app->flag_ch[i] = 0;
+		app->option_ch[i] = 0;
 		i++;
 	}
 }
@@ -67,52 +67,41 @@ void app_init(t_app *app)
 /*
 * TODO LATER:
 * FIX FT_PRINTF WHEN FREEING AND CLEAR ALL LEAKS AS POSIBLE
+* IMPORTANT: go to var_len in ft_printf, to check how to free any leaks with str and ints and format
 */
 
 int main(int argc, char **argv)
 {
-	/*
-	** Pointer for directory entry
-	*/
 	t_app           app;
+	int 			i;
 
+	i = 1;
 	app_init(&app);
+
 	if (argc >= 2)
 	{
-
 		// move this to 
-		if(!ft_strcmp(argv[1],"-R"))
-		{
-			app.recursive = 1;
-			app.cur_direct = argv[2];
-			app.root_direct = argv[2];
-		}
-		else if(!ft_strcmp(argv[1], "-r"))
-		{
-			app.reverse = 1;
-			app.cur_direct = argv[2];
-			app.root_direct = argv[2];
-		}
-		else
-		{
-			app.root_direct = argv[1];
-			app.cur_direct = argv[1];
-		}
+		i = check_active_option_ls(&app, argc, argv);
+		app.cur_direct = argv[i];
+		app.root_direct = argv[i];
+		// if(!ft_strcmp(argv[1],"-R"))
+		// {
+		// 	app.recursive = 1;
+		// 	app.cur_direct = argv[2];
+		// 	app.root_direct = argv[2];
+		// }
+		// else if(!ft_strcmp(argv[1], "-r"))
+		// {
+		// 	app.reverse = 1;
+		// 	app.cur_direct = argv[2];
+		// 	app.root_direct = argv[2];
+		// }
+		// else
+		// {
+		// 	app.root_direct = argv[1];
+		// 	app.cur_direct = argv[1];
+		// }
 	}
-
-	/*
-	** open directory descriptor 
-	** (simliar to file descriptor, instead with directories)
-	*/
-
-	// dir_stream = opendir(app.cur_direct);
-	// if (dir_stream == NULL)
-	// {
-	// 	// IMPORTANT: go to var_len in ft_printf, to check how to free any leaks with str and ints and format
-	// 	ft_printf("error\n");
-    //     ft_printf("ft_ls: %s: %s\n", app.cur_direct, strerror(errno));
-	// 	return (0);
-	// }
 	ft_ls(&app, app.cur_direct);
 	// system("leaks a.out");
 	return (0);

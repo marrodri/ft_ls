@@ -52,15 +52,15 @@ typedef	struct	s_tree
 
 typedef struct	s_app
 {
-	int flag_ch[5];
-	int reverse;
-	int	recursive;
-	int hi_len;
-	int win_col; //columns
-	int win_lines; //rows
-	char *cur_direct;
-	char *root_direct;
-}		t_app;
+	int		option_ch[5];
+	int		reverse;
+	int		recursive;
+	int		hi_len;
+	int		win_col; //columns
+	int		win_lines; //rows
+	char	*cur_direct;
+	char	*root_direct;
+}				t_app;
 
 
 /*
@@ -68,7 +68,8 @@ typedef struct	s_app
 */
 
 int		ft_ls(t_app *app, char *cur_direct);
-int 	check_active_option_ls(t_app *app, char **av);
+// int 	check_active_option_ls(t_app *app, char **av);
+int check_active_option_ls(t_app *app, int ac, char **av);
 
 /*
 ** checkers-------------------------------------------------------

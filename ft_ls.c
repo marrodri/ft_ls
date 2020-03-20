@@ -77,8 +77,13 @@ int		ft_ls(t_app *app, char *cur_direct)
 	app->hi_len = 0;
 	ls_tree = NULL;
 	dir_tree = NULL;
-	dir_stream = opendir(cur_direct);
 	dir_list = NULL;
+	/*
+	** opendir: open directory descriptor 
+	** (simliar to file descriptor, instead with directories)
+	** returns a directory stream
+	*/
+	dir_stream = opendir(cur_direct);
 	if (dir_stream == NULL)
 	{
 		// IMPORTANT: go to var_len in printf, to check how to free any leaks with str and ints and format
@@ -89,25 +94,24 @@ int		ft_ls(t_app *app, char *cur_direct)
 	while ((dir_entry = readdir(dir_stream)) != NULL)
 	{
 		// move this to output list
-		if ('.' != dir_entry->d_name[0])
+		if ('.' != dir_entry->d_name[0] || app->option_ch[1])
 		{
 			if (app->hi_len < (len = ft_strlen(dir_entry->d_name)))
 			{
 				app->hi_len = len;
 			}
 			//adds directory entries to the tree, not the name
-			if(app->reverse == 1)
+			if(app->option_ch[3] == 1)
 			{
-				ft_printf("!!!!!!list is set to reverse\n");
 				add_data_to_tree(&ls_tree, dir_entry, rev_alphanum_comp);
 			}
-			else if (app->reverse == 0)
+			else if (app->option_ch[3] == 0)
 			{
 				add_data_to_tree(&ls_tree, dir_entry, alphanum_comp);
 			}
 			//if the recursive is active, use the directory entry to check if its 
 			//NOTE: recheck what this function do
-			if (app->recursive)
+			if (app->option_ch[0])
 				add_direct_to_tree(&dir_tree, cur_direct, dir_entry, alphanum_comp);
 		}
 	}
