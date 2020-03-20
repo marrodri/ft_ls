@@ -12,7 +12,7 @@ void	ls_output(t_app *app, char **words)
 	}
 }
 
-void add_data_to_tree(t_tree **ls_tree, t_dirent *dir_entry)
+void add_data_to_tree(t_tree **ls_tree, t_dirent *dir_entry, int (*f)(t_dirent *d1, t_dirent *d2))
 {
 	if(!*ls_tree)
 	{
@@ -23,7 +23,7 @@ void add_data_to_tree(t_tree **ls_tree, t_dirent *dir_entry)
 	else
 	{
 		// addnode_tree((*ls_tree)->root, new_node(dir_entry->d_name));
-		addnode_tree((*ls_tree)->root, new_node(dir_entry));
+		addnode_tree((*ls_tree)->root, new_node(dir_entry), f);
 	}
 }
 
@@ -42,12 +42,13 @@ char	*append_directory(char *cur_direct, char *append_direct)
 int		is_directory(const char *path)
 {
 	struct stat		stat_buf;
+
 	lstat(path, &stat_buf);
 	return S_ISDIR(stat_buf.st_mode);
 }
 
-
-void add_direct_to_tree(t_tree **dir_tree, char *cur_direct, struct dirent *dir_entry)
+// t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node, int (*f)(t_dirent *d1, t_dirent *d2))
+void add_direct_to_tree(t_tree **dir_tree, char *cur_direct, t_dirent *dir_entry, int (*f)(t_dirent *d1, t_dirent *d2))
 {
 	char *append_dir;
 
@@ -60,14 +61,12 @@ void add_direct_to_tree(t_tree **dir_tree, char *cur_direct, struct dirent *dir_
 			init_tree(dir_tree, new_node(append_dir));
 		else
 		{
-			addnode_tree((*dir_tree)->root, new_node(append_dir));
+			addnode_tree((*dir_tree)->root, new_node(append_dir), f);
 		}
 	}
 	else
 		free(append_dir);
 }
-
-
 
 int		ft_ls(t_app *app, char *cur_direct)
 {
@@ -77,7 +76,6 @@ int		ft_ls(t_app *app, char *cur_direct)
 	t_tree		*dir_tree;
 	t_list		*dir_list;
 	DIR			*dir_stream;
-	//char		*append_dir;
 
 	len = 0;
 	app->hi_len = 0;
@@ -97,15 +95,24 @@ int		ft_ls(t_app *app, char *cur_direct)
 		// move this to output list
 		if ('.' != dir_entry->d_name[0])
 		{
-			if ((app)->hi_len < (len = ft_strlen(dir_entry->d_name)))
+			if (app->hi_len < (len = ft_strlen(dir_entry->d_name)))
 			{
-				(app)->hi_len = len;
+				app->hi_len = len;
 			}
 			//adds directory entries to the tree, not the name
-			add_data_to_tree(&ls_tree, dir_entry);
+			if(app->reverse == 1)
+			{
+
+				add_data_to_tree(&ls_tree, dir_entry, alphanum_comp);
+			}
+			else
+			{
+				add_data_to_tree(&ls_tree, dir_entry, alphanum_comp);
+			}
 			//if the recursive is active, use the directory entry to check if its 
+			//NOTE: recheck what this function do
 			if (app->recursive)
-				add_direct_to_tree(&dir_tree, cur_direct, dir_entry);
+				add_direct_to_tree(&dir_tree, cur_direct, dir_entry, alphanum_comp);
 		}
 	}
 	print_inorder_tree(ls_tree->root);
@@ -118,19 +125,23 @@ int		ft_ls(t_app *app, char *cur_direct)
 	if (app->recursive && dir_tree)
 	{
 		binary_tree_to_list(dir_tree->root, &dir_list);
+
 		t_list *hold = dir_list;
+
 		while(dir_list)
 		{
 			ft_printf("%s:\n", dir_list->content);
 			ft_ls(app,dir_list->content);
 			dir_list = dir_list->next;
 		}
+
 		free_binary_tree(dir_tree->root);
+
+		//free list
 		// while(hold)
 		// {
 
 		// }
-		
 	}
 	free_binary_tree(ls_tree->root);
 

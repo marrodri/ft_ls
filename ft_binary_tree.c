@@ -71,8 +71,8 @@ void free_binary_tree(t_tree_node *root)
 }
 
 //add comparison
-// t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node, int (*f)(t_dirent *d1, t_dirent *d2))
-t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node)
+// t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node)
+t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node, int (*f)(t_dirent *d1, t_dirent *d2))
 {
 	if (curr == NULL)
 	{
@@ -80,13 +80,13 @@ t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node)
 	}
 	else
 	{
-		if (ft_strcmp(curr->data, node->data) > 0)
+		if (f(curr->data, node->data))
 		{
-			curr->left = addnode_tree(curr->left, node);
+			curr->left = addnode_tree(curr->left, node, f);
 		}
 		else
 		{
-			curr->right = addnode_tree(curr->right, node);
+			curr->right = addnode_tree(curr->right, node, f);
 		}
 		return (curr);
 	}
