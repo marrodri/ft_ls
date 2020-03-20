@@ -53,6 +53,7 @@ void app_init(t_app *app)
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 	app->hi_len = 0;
 	app->recursive = 0;
+	app->reverse = 0;
 	app->win_col = w.ws_col;
 	app->cur_direct = ".";
 	app->root_direct = ".";
@@ -77,10 +78,17 @@ int main(int argc, char **argv)
 	app_init(&app);
 	if (argc >= 2)
 	{
+
+		// move this to 
 		if(!ft_strcmp(argv[1],"-R"))
 		{
 			app.recursive = 1;
-			// ft_printf("RECURSIVE ACTIVATED\n");
+			app.cur_direct = argv[2];
+			app.root_direct = argv[2];
+		}
+		else if(!ft_strcmp(argv[1], "-r"))
+		{
+			app.reverse = 0;
 			app.cur_direct = argv[2];
 			app.root_direct = argv[2];
 		}

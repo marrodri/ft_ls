@@ -16,17 +16,14 @@
 # define FLAG_SZ 5
 // from unistd.h readlink
 
-// exit()
-
-
+typedef struct dirent t_dirent;
 
 
 //	-l, more detailed output
-//  -R, recursive output
+//  -R, recursive output, ALMOST DONE, there's segfault when using recursive on the desktop
 //  -a, display hidden files, ._* files
 //  -r, reverse the list order
 //  -t, sorts by modification time, from the most current
-
 
 
 typedef struct	s_tree_node
@@ -56,13 +53,13 @@ typedef	struct	s_tree
 typedef struct	s_app
 {
 	int flag_ch[5];
+	int reverse;
 	int	recursive;
 	int hi_len;
 	int win_col; //columns
 	int win_lines; //rows
 	char *cur_direct;
 	char *root_direct;
-	// t_tree *directories;
 }		t_app;
 
 
@@ -87,6 +84,13 @@ int			is_regular_file(const char *file);
 */
 
 char		**ft_sortwords(char **words, int (*f)(char *a, char *b));
+
+/*
+** binary tree comparisons-------------------------------------------
+*/
+
+int alphanum_comp(char *cur_str, char *node_str);
+int rev_alphanum_comp(char *cur_str, char *node_str);
 
 /*
 ** Binary Tree-------------------------------------------------------

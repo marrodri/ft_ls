@@ -14,14 +14,17 @@
 
 void print_inorder_tree(t_tree_node *curr)
 {
+	t_dirent *dirent;
+
 	if(!curr)
 	{
 		ft_printf("NULL\n");
 		return ;
 	}
+	dirent = curr->data;
 	if (!curr->left && !curr->right)
 	{
-		ft_printf("%s\n", curr->data);
+		ft_printf("%s\n", dirent->d_name);
 		return ;
 	}
 	else if(curr)
@@ -30,8 +33,9 @@ void print_inorder_tree(t_tree_node *curr)
 		{
 			print_inorder_tree(curr->left); 
 		}
+		dirent = curr->data;
 		if(curr)
-			ft_printf("%s\n", curr->data);
+			ft_printf("%s\n", dirent->d_name);
 		if(curr->right)
 		{
 			print_inorder_tree(curr->right); 
@@ -67,6 +71,7 @@ void free_binary_tree(t_tree_node *root)
 }
 
 //add comparison
+// t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node, int (*f)(t_dirent *d1, t_dirent *d2))
 t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node)
 {
 	if (curr == NULL)

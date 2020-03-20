@@ -12,13 +12,18 @@ void	ls_output(t_app *app, char **words)
 	}
 }
 
-void add_data_to_tree(t_tree **ls_tree, struct dirent *dir_entry)
+void add_data_to_tree(t_tree **ls_tree, t_dirent *dir_entry)
 {
 	if(!*ls_tree)
-		init_tree(ls_tree, new_node(dir_entry->d_name));
+	{
+		
+		// init_tree(ls_tree, new_node(dir_entry->d_name));
+		init_tree(ls_tree, new_node(dir_entry));
+	}
 	else
 	{
-		addnode_tree((*ls_tree)->root, new_node(dir_entry->d_name));
+		// addnode_tree((*ls_tree)->root, new_node(dir_entry->d_name));
+		addnode_tree((*ls_tree)->root, new_node(dir_entry));
 	}
 }
 
@@ -67,12 +72,12 @@ void add_direct_to_tree(t_tree **dir_tree, char *cur_direct, struct dirent *dir_
 int		ft_ls(t_app *app, char *cur_direct)
 {
 	int len;
-	struct dirent   *dir_entry; //directory entry
-	t_tree *ls_tree;
-	t_tree *dir_tree;
-	t_list *dir_list;
-	DIR		*dir_stream;
-	char *append_direct;
+	t_dirent   *dir_entry; //directory entry
+	t_tree		*ls_tree;
+	t_tree		*dir_tree;
+	t_list		*dir_list;
+	DIR			*dir_stream;
+	//char		*append_dir;
 
 	len = 0;
 	app->hi_len = 0;
@@ -96,7 +101,9 @@ int		ft_ls(t_app *app, char *cur_direct)
 			{
 				(app)->hi_len = len;
 			}
+			//adds directory entries to the tree, not the name
 			add_data_to_tree(&ls_tree, dir_entry);
+			//if the recursive is active, use the directory entry to check if its 
 			if (app->recursive)
 				add_direct_to_tree(&dir_tree, cur_direct, dir_entry);
 		}
