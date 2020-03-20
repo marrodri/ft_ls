@@ -102,10 +102,10 @@ int		ft_ls(t_app *app, char *cur_direct)
 			//adds directory entries to the tree, not the name
 			if(app->reverse == 1)
 			{
-
-				add_data_to_tree(&ls_tree, dir_entry, alphanum_comp);
+				ft_printf("!!!!!!list is set to reverse\n");
+				add_data_to_tree(&ls_tree, dir_entry, rev_alphanum_comp);
 			}
-			else
+			else if (app->reverse == 0)
 			{
 				add_data_to_tree(&ls_tree, dir_entry, alphanum_comp);
 			}

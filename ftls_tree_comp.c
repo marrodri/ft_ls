@@ -14,7 +14,7 @@ int rev_alphanum_comp(t_dirent *d1, t_dirent *d2)
 }
 
 // t flag use this comp
-int file_date_comp()
+int file_date_comp(t_dirent *d1, t_dirent *d2)
 {
 	return 0;
 }

@@ -88,7 +88,7 @@ int main(int argc, char **argv)
 		}
 		else if(!ft_strcmp(argv[1], "-r"))
 		{
-			app.reverse = 0;
+			app.reverse = 1;
 			app.cur_direct = argv[2];
 			app.root_direct = argv[2];
 		}
