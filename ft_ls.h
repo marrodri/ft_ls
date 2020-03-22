@@ -75,6 +75,8 @@ int check_active_option_ls(t_app *app, int ac, char **av);
 
 void	ls_output(t_app *app, t_tree *file_tree);
 
+void print_inorder_str_tree(t_tree_node *curr);
+
 /*
 ** checkers-------------------------------------------------------
 */

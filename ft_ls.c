@@ -102,12 +102,18 @@ int		ft_ls(t_app *app, char *cur_direct)
 			{
 				add_data_to_tree(&ls_tree, dir_entry, alphanum_comp);
 			}
-			//if the recursive is active, use the directory entry to check if its 
-			//NOTE: recheck what this function do
+			//if the recursive is active, use the directory entry to check
+			//add a condition that the .. file is not checked
 			if (app->option_ch[0] == 1)
 			{
-				//add a condition that the .. file is not checked
-				add_direct_to_tree(&dir_tree, cur_direct, dir_entry, alphanum_comp);
+				if (app->option_ch[3] == 1)
+				{
+					add_direct_to_tree(&dir_tree, cur_direct, dir_entry, rev_alphanum_comp);
+				}
+				else
+				{
+					add_direct_to_tree(&dir_tree, cur_direct, dir_entry, alphanum_comp);
+				}
 			}
 		}
 	}
@@ -121,6 +127,9 @@ int		ft_ls(t_app *app, char *cur_direct)
 	// print_list(dir_list);
 	if (app->option_ch[0] && dir_tree)
 	{
+		ft_printf("+++++++++PRINTINT DIR TREE+++++++++\n");
+		print_inorder_str_tree(dir_tree->root);
+		ft_printf("================!!!!!!!!!\n\n");
 		binary_tree_to_list(dir_tree->root, &dir_list);
 		t_list *hold = dir_list;
 		while(dir_list)

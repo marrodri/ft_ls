@@ -29,15 +29,34 @@ test
 test_output.txt
 trash
 
++++++++++PRINTINT DIR TREE+++++++++
+./a.out.dSYM
+
+
+
+================!!!!!!!!!
+
 ./a.out.dSYM:
 Contents
+
++++++++++PRINTINT DIR TREE+++++++++
+./a.out.dSYM/Contents
+================!!!!!!!!!
 
 ./a.out.dSYM/Contents:
 Info.plist
 Resources
 
++++++++++PRINTINT DIR TREE+++++++++
+./a.out.dSYM/Contents/Resources
+================!!!!!!!!!
+
 ./a.out.dSYM/Contents/Resources:
 DWARF
+
++++++++++PRINTINT DIR TREE+++++++++
+./a.out.dSYM/Contents/Resources/DWARF
+================!!!!!!!!!
 
 ./a.out.dSYM/Contents/Resources/DWARF:
 a.out

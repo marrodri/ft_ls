@@ -12,6 +12,38 @@
 
 #include "ft_ls.h"
 
+void print_inorder_str_tree(t_tree_node *curr)
+{
+	char *str;
+
+	if(!curr)
+	{
+		ft_printf("NULL\n");
+		return ;
+	}
+	str = curr->data;
+	if (!curr->left && !curr->right)
+	{
+		ft_printf("%s\n", str);
+		return ;
+	}
+	else if(curr)
+	{
+		if (curr->left)
+		{
+			print_inorder_tree(curr->left); 
+		}
+		str = curr->data;
+		if(curr)
+			ft_printf("%s\n", str);
+		if(curr->right)
+		{
+			print_inorder_tree(curr->right); 
+		}
+	}
+		return ;
+}
+
 void print_inorder_tree(t_tree_node *curr)
 {
 	t_dirent *dirent;
