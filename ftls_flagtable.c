@@ -12,7 +12,11 @@ static int	option_checker(char opt)
 	while(options[i])
 	{
 		if (options[i] == opt)
+		{
+			ft_printf("option %c found\n", options[i]);	
+			ft_printf("i is %d\n", i);	
 			return (i);
+		}
 		i++;
 	}
 	return (-1);
@@ -33,9 +37,11 @@ static void check_options_in_one_argv(t_app *app, char *av)
 	i = 1;
 	while (av[i])
 	{
-		if ((pos = option_checker(av[i])) != -1)
+		if ((pos = option_checker(av[i])) >= 0)
 		{
 			app->option_ch[pos] = 1;
+			ft_printf("pos is %d\n", pos);
+			ft_printf("app->option_ch[%d] is %d\n", pos, app->option_ch[pos]);
 		}
 		i++;
 	}

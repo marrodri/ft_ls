@@ -1,17 +1,6 @@
 
 #include "ft_ls.h"
 
-void	ls_output(t_app *app, char **words)
-{
-	int i = 0;
-	while (words[i])
-	{
-		char *str = "%-15s";
-		printf(str, words[i]);
-		i++;
-	}
-}
-
 void add_data_to_tree(t_tree **ls_tree, t_dirent *dir_entry, int (*f)(t_dirent *d1, t_dirent *d2))
 {
 	if(!*ls_tree)
@@ -34,14 +23,6 @@ char	*append_directory(char *cur_direct, char *append_direct)
 	new_dir = ft_strjoin(new_dir, append_direct);
 	free(tmp);
 	return new_dir;
-}
-
-int		is_directory(const char *path)
-{
-	struct stat		stat_buf;
-
-	lstat(path, &stat_buf);
-	return S_ISDIR(stat_buf.st_mode);
 }
 
 void add_direct_to_tree(t_tree **dir_tree, char *cur_direct, t_dirent *dir_entry, int (*f)(t_dirent *d1, t_dirent *d2))
@@ -67,10 +48,10 @@ void add_direct_to_tree(t_tree **dir_tree, char *cur_direct, t_dirent *dir_entry
 int		ft_ls(t_app *app, char *cur_direct)
 {
 	int len;
-	t_dirent   *dir_entry; //directory entry
-	t_tree		*ls_tree;
-	t_tree		*dir_tree;
-	t_list		*dir_list;
+	t_dirent	*dir_entry; //directory entry
+	t_tree		*ls_tree;  //tree that holds directory entries, (file data)
+	t_tree		*dir_tree; //tree that holds directory names
+	t_list		*dir_list; //list that holds directory names 
 	DIR			*dir_stream; //directory stream
 
 	len = 0;
@@ -105,38 +86,46 @@ int		ft_ls(t_app *app, char *cur_direct)
 			{
 				add_data_to_tree(&ls_tree, dir_entry, rev_alphanum_comp);
 			}
-			else if (app->option_ch[3] == 0)
+			// else if (app->option_ch[3] == 0)
+			// {
+			// 	add_data_to_tree(&ls_tree, dir_entry, alphanum_comp);
+			// }
+			else if(app->option_ch[4] && !app->option_ch[3])
+			{
+				ft_printf(" order by current modified date\n");
+			}
+			else if(app->option_ch[4] && app->option_ch[3])
+			{
+				ft_printf(" order by reverser current modified date\n");
+			}
+			else
 			{
 				add_data_to_tree(&ls_tree, dir_entry, alphanum_comp);
 			}
 			//if the recursive is active, use the directory entry to check if its 
 			//NOTE: recheck what this function do
-			if (app->option_ch[0])
+			if (app->option_ch[0] == 1)
+			{
 				add_direct_to_tree(&dir_tree, cur_direct, dir_entry, alphanum_comp);
+			}
 		}
 	}
-	print_inorder_tree(ls_tree->root);
+	ls_output(app, ls_tree);
 	closedir(dir_stream);
 	ft_printf("\n");
-	// words = ft_sortwords(words, is_rsorted);
-	// ls_output(app, words);
 	// print_list(dir_list);
 	// print_list(dir_list);
-	if (app->recursive && dir_tree)
+	if (app->option_ch[0] && dir_tree)
 	{
 		binary_tree_to_list(dir_tree->root, &dir_list);
-
 		t_list *hold = dir_list;
-
 		while(dir_list)
 		{
 			ft_printf("%s:\n", dir_list->content);
 			ft_ls(app,dir_list->content);
 			dir_list = dir_list->next;
 		}
-
 		free_binary_tree(dir_tree->root);
-
 		//free list
 		// while(hold)
 		// {

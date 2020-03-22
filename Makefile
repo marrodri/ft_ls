@@ -4,7 +4,7 @@ NAME = ft_ls
 RM = rm -f
 
 SRC = ft_binary_tree.c ft_ls.c ftls_getstatus.c ftls_tree_comp.c\
-		main.c ftls_flagtable.c
+		main.c ftls_flagtable.c ftls_output.c
 
 OBJ = $(SRC:.c=.o)
 

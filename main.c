@@ -52,8 +52,6 @@ void app_init(t_app *app)
 	i = 0;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 	app->hi_len = 0;
-	app->recursive = 0;
-	app->reverse = 0;
 	app->win_col = w.ws_col;
 	app->cur_direct = ".";
 	app->root_direct = ".";
@@ -68,6 +66,9 @@ void app_init(t_app *app)
 * TODO LATER:
 * FIX FT_PRINTF WHEN FREEING AND CLEAR ALL LEAKS AS POSIBLE
 * IMPORTANT: go to var_len in ft_printf, to check how to free any leaks with str and ints and format
+
+* BUGS FOUND:
+* segfault when there is an empty folder
 */
 
 int main(int argc, char **argv)

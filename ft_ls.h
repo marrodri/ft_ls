@@ -43,18 +43,17 @@ typedef	struct	s_tree
 
 /*
 ** flag_ch
-** 0 = R flag
-** 1 = a flag
-** 2 = l flag
-** 3 = r flag
-** 4 = t flag
+** 0 = R flag DONE
+** 1 = a flag DONE
+** 2 = l flag output, use this for ls_output
+** 3 = r flag reverse  ascii order
+** 4 = t flag date mod order
+** 3 and 4 = rt reverse date mod order
 */ 
 
 typedef struct	s_app
 {
 	int		option_ch[5];
-	int		reverse;
-	int		recursive;
 	int		hi_len;
 	int		win_col; //columns
 	int		win_lines; //rows
@@ -68,14 +67,19 @@ typedef struct	s_app
 */
 
 int		ft_ls(t_app *app, char *cur_direct);
-// int 	check_active_option_ls(t_app *app, char **av);
 int check_active_option_ls(t_app *app, int ac, char **av);
+
+/*
+** list output----------------------------------------------------
+*/
+
+void	ls_output(t_app *app, t_tree *file_tree);
 
 /*
 ** checkers-------------------------------------------------------
 */
 
-int			is_rsorted(char *a, char *b);
+int			is_directory(const char *path);
 int			is_regular_file(const char *file);
 
 /*
