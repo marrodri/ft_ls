@@ -25,7 +25,8 @@ char	*append_directory(char *cur_direct, char *append_direct)
 	return new_dir;
 }
 
-void add_direct_to_tree(t_tree **dir_tree, char *cur_direct, t_dirent *dir_entry, int (*f)(t_dirent *d1, t_dirent *d2))
+void add_direct_to_tree(t_tree **dir_tree, char *cur_direct, t_dirent *dir_entry,
+	int (*f)(t_dirent *d1, t_dirent *d2))
 {
 	char *append_dir;
 
@@ -40,6 +41,7 @@ void add_direct_to_tree(t_tree **dir_tree, char *cur_direct, t_dirent *dir_entry
 				init_tree(dir_tree, new_node(append_dir));
 			else
 			{
+				//note, it compares dirents, not strings with the f funct
 				addnode_tree((*dir_tree)->root, new_node(append_dir), f);
 			}
 		}
@@ -48,19 +50,72 @@ void add_direct_to_tree(t_tree **dir_tree, char *cur_direct, t_dirent *dir_entry
 	//}
 }
 
+t_list *directories_to_list(t_tree **ls_tree, char *cur_direct, t_list *dir_list,
+	int (*f)(t_dirent *d1, t_dirent *d2))
+{
+	char *append_dir;
+	t_list *new_dir_list;
+	t_dirent *dir_entry;
+
+	// TODO:
+		//return 
+	// printf("cur_direct is |%s|\n", append_dir);
+
+
+		append_dir = append_directory(cur_direct, dir_entry->d_name);
+		// if (is_directory(append_dir))
+		// {
+		// 	// printf("data is directory, setting to dir_tree\n");
+		// 	if (!*dir_tree)
+		// 		init_tree(dir_tree, new_node(append_dir));
+		// 	else
+		// 	{
+		// 		//note, it compares dirents, not strings with the f funct
+		// 		addnode_tree((*dir_tree)->root, new_node(append_dir), f);
+		// 	}
+		// }
+		// else
+			free(append_dir);
+}
+
+void	last_mod_file_comp(t_dirent *dir1, t_dirent *dir2)
+{
+	
+}
+
+void	setting_tree_ls(t_app *app, t_tree **ls_tree, t_dirent *dir_entry)
+{
+	if(app->option_ch[3] == 1)
+	{
+		add_data_to_tree(ls_tree, dir_entry, rev_alphanum_comp);
+	}
+	else if(app->option_ch[4] && !app->option_ch[3])
+	{
+		ft_printf(" order by current modified date\n");
+	}
+	else if(app->option_ch[4] && app->option_ch[3])
+	{
+		ft_printf(" order by reverser current modified date\n");
+	}
+	else
+	{
+		add_data_to_tree(ls_tree, dir_entry, alphanum_comp);
+	}
+}
+
 int		ft_ls(t_app *app, char *cur_direct)
 {
 	int len;
 	t_dirent	*dir_entry; //directory entry
 	t_tree		*ls_tree;  //tree that holds directory entries, (file data)
-	t_tree		*dir_tree; //tree that holds directory names
+	// t_tree		*dir_tree; //REMOVE THIS
 	t_list		*dir_list; //list that holds directory names 
 	DIR			*dir_stream; //directory stream
 
 	len = 0;
 	app->hi_len = 0;
 	ls_tree = NULL;
-	dir_tree = NULL;
+	//dir_tree = NULL;
 	dir_list = NULL;
 	/*
 	** opendir: open directory descriptor 
@@ -81,40 +136,20 @@ int		ft_ls(t_app *app, char *cur_direct)
 		//case, enter all dots when the a option is added
 		if ('.' != dir_entry->d_name[0] || app->option_ch[1])
 		{
-			if (app->hi_len < (len = ft_strlen(dir_entry->d_name)))
-			{
-				app->hi_len = len;
-			}
-			//adds directory entries to the tree, not the name
-			if(app->option_ch[3] == 1)
-			{
-				add_data_to_tree(&ls_tree, dir_entry, rev_alphanum_comp);
-			}
-			else if(app->option_ch[4] && !app->option_ch[3])
-			{
-				ft_printf(" order by current modified date\n");
-			}
-			else if(app->option_ch[4] && app->option_ch[3])
-			{
-				ft_printf(" order by reverser current modified date\n");
-			}
-			else
-			{
-				add_data_to_tree(&ls_tree, dir_entry, alphanum_comp);
-			}
+			setting_tree_ls(app, &ls_tree, dir_entry);
 			//if the recursive is active, use the directory entry to check
 			//add a condition that the .. file is not checked
-			if (app->option_ch[0] == 1)
-			{
-				if (app->option_ch[3] == 1)
-				{
-					add_direct_to_tree(&dir_tree, cur_direct, dir_entry, rev_alphanum_comp);
-				}
-				else
-				{
-					add_direct_to_tree(&dir_tree, cur_direct, dir_entry, alphanum_comp);
-				}
-			}
+			// if (app->option_ch[0] == 1)
+			// {
+			// 	// if (app->option_ch[3] == 1)
+			// 	// {
+			// 	// 	add_direct_to_tree(&dir_tree, cur_direct, dir_entry, rev_alphanum_str_comp);
+			// 	// }
+			// 	// else
+			// 	// {
+			// 	// 	add_direct_to_tree(&dir_tree, cur_direct, dir_entry, alphanum_comp);
+			// 	// }
+			// }
 		}
 	}
 	if(ls_tree)
@@ -124,13 +159,12 @@ int		ft_ls(t_app *app, char *cur_direct)
 	}
 	closedir(dir_stream);
 	// print_list(dir_list);
-	// print_list(dir_list);
-	if (app->option_ch[0] && dir_tree)
+	if (app->option_ch[0])
 	{
-		ft_printf("+++++++++PRINTINT DIR TREE+++++++++\n");
-		print_inorder_str_tree(dir_tree->root);
-		ft_printf("================!!!!!!!!!\n\n");
-		binary_tree_to_list(dir_tree->root, &dir_list);
+		
+		binary_tree_to_list(ls_tree->root, &dir_list);
+		add_direct_to_list(ls_tree);
+	 	// print_list(dir_list);
 		t_list *hold = dir_list;
 		while(dir_list)
 		{
@@ -138,7 +172,7 @@ int		ft_ls(t_app *app, char *cur_direct)
 			ft_ls(app,dir_list->content);
 			dir_list = dir_list->next;
 		}
-		free_binary_tree(dir_tree->root);
+		// free_binary_tree(dir_tree->root);
 		//free list
 		// while(hold)
 		// {

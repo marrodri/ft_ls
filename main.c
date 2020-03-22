@@ -80,28 +80,12 @@ int main(int argc, char **argv)
 	app_init(&app);
 
 	if (argc >= 2)
-	{
-		// move this to 
+	{ 
 		i = check_active_option_ls(&app, argc, argv);
+		// set argvs to app_tree if more than 1 argv name 
+		// apart from the options argvs;
 		app.cur_direct = argv[i];
 		app.root_direct = argv[i];
-		// if(!ft_strcmp(argv[1],"-R"))
-		// {
-		// 	app.recursive = 1;
-		// 	app.cur_direct = argv[2];
-		// 	app.root_direct = argv[2];
-		// }
-		// else if(!ft_strcmp(argv[1], "-r"))
-		// {
-		// 	app.reverse = 1;
-		// 	app.cur_direct = argv[2];
-		// 	app.root_direct = argv[2];
-		// }
-		// else
-		// {
-		// 	app.root_direct = argv[1];
-		// 	app.cur_direct = argv[1];
-		// }
 	}
 	ft_ls(&app, app.cur_direct);
 	// system("leaks a.out");

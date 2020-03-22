@@ -31,14 +31,16 @@ typedef struct	s_tree_node
 	void				*parent;
 	void				*data;
 	int					use_free_on_data;
-	int					node_already_checked;
+	int					node_on_list;
 	struct s_tree_node	*left;
 	struct s_tree_node	*right;
 }				t_tree_node;
 
 typedef	struct	s_tree
 {
-	struct s_tree_node	*root;
+	t_tree_node	*root;
+	t_tree_node	*bottom_left; //use it for traversing the tree for searching directories
+	t_tree_node *bottom_right;
 }				t_tree;
 
 /*
@@ -50,6 +52,13 @@ typedef	struct	s_tree
 ** 4 = t flag date mod order
 ** 3 and 4 = rt reverse date mod order
 */ 
+
+typedef struct s_dir_data
+{
+	char	*dir_path;
+	t_dirent *dir;
+	int		time;
+}				t_dir_data;
 
 typedef struct	s_app
 {
@@ -96,6 +105,8 @@ char		**ft_sortwords(char **words, int (*f)(char *a, char *b));
 
 int alphanum_comp(t_dirent *d1, t_dirent *d2);
 int rev_alphanum_comp(t_dirent *d1, t_dirent *d2);
+
+int rev_alphanum_str_comp(char *str1, char *str2);
 
 /*
 ** Binary Tree-------------------------------------------------------

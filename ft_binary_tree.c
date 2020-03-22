@@ -135,7 +135,10 @@ t_tree_node *new_node(void *data)
 	t_tree_node *new_node;
 
 	new_node = malloc(sizeof(t_tree_node));
+	new_node->node_on_list = 0;
+	new_node->use_free_on_data = 0;
 	new_node->data = data;
+	new_node->parent = NULL;
 	new_node->left = NULL;
 	new_node->right = NULL;
 	return (new_node);
