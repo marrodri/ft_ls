@@ -29,20 +29,23 @@ void add_direct_to_tree(t_tree **dir_tree, char *cur_direct, t_dirent *dir_entry
 {
 	char *append_dir;
 
-	append_dir = append_directory(cur_direct, dir_entry->d_name);
 	// printf("cur_direct is |%s|\n", append_dir);
-	if (is_directory(append_dir))
-	{
-		// printf("data is directory, setting to dir_tree\n");
-		if (!*dir_tree)
-			init_tree(dir_tree, new_node(append_dir));
-		else
+	//if(!ft_strequ(dir_entry->d_name, ".."))
+	//{
+		append_dir = append_directory(cur_direct, dir_entry->d_name);
+		if (is_directory(append_dir))
 		{
-			addnode_tree((*dir_tree)->root, new_node(append_dir), f);
+			// printf("data is directory, setting to dir_tree\n");
+			if (!*dir_tree)
+				init_tree(dir_tree, new_node(append_dir));
+			else
+			{
+				addnode_tree((*dir_tree)->root, new_node(append_dir), f);
+			}
 		}
-	}
-	else
-		free(append_dir);
+		else
+			free(append_dir);
+	//}
 }
 
 int		ft_ls(t_app *app, char *cur_direct)
@@ -72,9 +75,10 @@ int		ft_ls(t_app *app, char *cur_direct)
         printf("ft_ls: %s: %s\n", cur_direct, strerror(errno));
 		return (0);
 	}
+	//if the folder is empty it exits right away, leaving the tree, still null
 	while ((dir_entry = readdir(dir_stream)) != NULL)
 	{
-		// move this to output list
+		//case, enter all dots when the a option is added
 		if ('.' != dir_entry->d_name[0] || app->option_ch[1])
 		{
 			if (app->hi_len < (len = ft_strlen(dir_entry->d_name)))
@@ -86,10 +90,6 @@ int		ft_ls(t_app *app, char *cur_direct)
 			{
 				add_data_to_tree(&ls_tree, dir_entry, rev_alphanum_comp);
 			}
-			// else if (app->option_ch[3] == 0)
-			// {
-			// 	add_data_to_tree(&ls_tree, dir_entry, alphanum_comp);
-			// }
 			else if(app->option_ch[4] && !app->option_ch[3])
 			{
 				ft_printf(" order by current modified date\n");
@@ -106,13 +106,17 @@ int		ft_ls(t_app *app, char *cur_direct)
 			//NOTE: recheck what this function do
 			if (app->option_ch[0] == 1)
 			{
+				//add a condition that the .. file is not checked
 				add_direct_to_tree(&dir_tree, cur_direct, dir_entry, alphanum_comp);
 			}
 		}
 	}
-	ls_output(app, ls_tree);
+	if(ls_tree)
+	{
+		ls_output(app, ls_tree);
+		ft_printf("\n");
+	}
 	closedir(dir_stream);
-	ft_printf("\n");
 	// print_list(dir_list);
 	// print_list(dir_list);
 	if (app->option_ch[0] && dir_tree)
@@ -132,7 +136,8 @@ int		ft_ls(t_app *app, char *cur_direct)
 
 		// }
 	}
-	free_binary_tree(ls_tree->root);
+	if(ls_tree)
+		free_binary_tree(ls_tree->root);
 
 	/*
 	** NOTE: everything is not leaking at this point so every memory is still
