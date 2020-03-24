@@ -5,9 +5,9 @@
 # include <sys/types.h>
 # include <dirent.h> // opendir, readdir, closedir
 # include <sys/stat.h> //stat, lstat
-# include <pwd.h> //getpwuid
-# include <grp.h> //getgrgid
-# include <sys/xattr.h> //listxattr, getxattr
+# include <pwd.h> //getpwuid //for ls prob
+# include <grp.h> //getgrgid //for ls prob
+# include <sys/xattr.h> //listxattr, getxattr  ..bonus probably
 # include <time.h> //time, ctime
 # include <errno.h> //perror, strerror
 # include <sys/ioctl.h> //BONUS for properling spacing the ft_ls as possible as the original ls output
@@ -110,11 +110,10 @@ char		**ft_sortwords(char **words, int (*f)(char *a, char *b));
 ** binary tree comparisons-------------------------------------------
 */
 
-int alphanum_comp(t_dirent *d1, t_dirent *d2);
-int rev_alphanum_comp(t_dirent *d1, t_dirent *d2);
-
-int rev_alphanum_str_comp(char *str1, char *str2);
-
+int		alphanum_comp(t_dirent *d1, t_dirent *d2);
+int		rev_alphanum_comp(t_dirent *d1, t_dirent *d2);
+int		file_date_comp(t_dirent *dir1, t_dirent *dir2);
+int		rev_file_date_comp(t_dirent *dir1, t_dirent *dir2);
 /*
 ** Binary Tree-------------------------------------------------------
 */

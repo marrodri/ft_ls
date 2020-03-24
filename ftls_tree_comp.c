@@ -13,21 +13,48 @@ int rev_alphanum_comp(t_dirent *d1, t_dirent *d2)
 	return (ft_strcmp(d1->d_name, d2->d_name) < 0);
 }
 
-// -Rr flag
-
-// int rev_alphanum_str_comp(char *str1, char *str2)
-// {
-// 	return (ft_strcmp(str1, str2) < 0);
-// }
-
 // t flag use this comp
-int file_date_comp(t_dirent *d1, t_dirent *d2)
+int	 file_date_comp(t_dirent *dir1, t_dirent *dir2)
 {
-	return 0;
+	//stat, lstat
+	//time, ctime
+
+	char *file1;
+	char *file2;
+	struct stat s1;
+	struct stat s2;
+
+	file1 = dir1->d_name;
+	file2 = dir2->d_name;
+
+	//check how the stat, works
+	stat(file1, &s1);
+	stat(file2, &s2);
+	// s1.st_ctime;
+
+	//check what is the st_ctime and how it works
+	return ((s1.st_ctime - s2.st_ctime) < 0);
 }
 
 // when rt flags are used
-int rev_file_date_comp()
+int rev_file_date_comp(t_dirent *dir1, t_dirent *dir2)
 {
-	return 0;
+	//stat, lstat
+	//time, ctime
+
+	char *file1;
+	char *file2;
+	struct stat s1;
+	struct stat s2;
+
+	file1 = dir1->d_name;
+	file2 = dir2->d_name;
+
+	//check how the stat, works
+	stat(file1, &s1);
+	stat(file2, &s2);
+	// s1.st_ctime;
+
+	//check what is the st_ctime and how it works
+	return ((s1.st_ctime - s2.st_ctime) > 0);
 }

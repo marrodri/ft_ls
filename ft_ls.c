@@ -1,10 +1,27 @@
 
 #include "ft_ls.h"
 
-void	last_mod_file_comp(t_dirent *dir1, t_dirent *dir2)
-{
-	
-}
+// int	 file_date_comp(t_dirent *dir1, t_dirent *dir2)
+// {
+// 	//stat, lstat
+// 	//time, ctime
+
+// 	char *file1;
+// 	char *file2;
+// 	struct stat s1;
+// 	struct stat s2;
+
+// 	file1 = dir1->d_name;
+// 	file2 = dir2->d_name;
+
+// 	//check how the stat, works
+// 	stat(file1, &s1);
+// 	stat(file2, &s2);
+// 	// s1.st_ctime;
+
+// 	//check what is the st_ctime and how it works
+// 	return ((s1.st_ctime - s2.st_ctime) < 0);
+// }
 
 void add_data_to_tree(t_tree **ls_tree, t_dirent *dir_entry,
 	int (*f)(t_dirent *d1, t_dirent *d2))
@@ -27,11 +44,13 @@ void	setting_tree_ls(t_app *app, t_tree **ls_tree, t_dirent *dir_entry)
 	}
 	else if (app->option_ch[4] && !app->option_ch[3])
 	{
-		ft_printf(" order by current modified date\n");
+		add_data_to_tree(ls_tree, dir_entry, file_date_comp);
+		// ft_printf(" order by current modified date\n");
 	}
 	else if (app->option_ch[4] && app->option_ch[3])
 	{
-		ft_printf(" order by reverser current modified date\n");
+		add_data_to_tree(ls_tree, dir_entry, rev_file_date_comp);
+		// ft_printf(" order by reverser current modified date\n");
 	}
 	else
 	{
@@ -39,6 +58,7 @@ void	setting_tree_ls(t_app *app, t_tree **ls_tree, t_dirent *dir_entry)
 	}
 }
 
+//CHECKPOINT: DEBUG THE RECURSIVE WITH r
 void	recursive_ls(t_app *app, t_tree *ls_tree, char *cur_direct)
 {
 	t_list *dir_list;
@@ -67,7 +87,6 @@ int		ft_ls(t_app *app, char *cur_direct)
 	int			len;
 	t_dirent	*dir_entry; //directory entry
 	t_tree		*ls_tree;  //tree that holds directory entries, (file and directory data)
-	// t_list		*dir_list; //list that holds directory names 
 	DIR			*dir_stream; //directory stream
 
 	len = 0;
