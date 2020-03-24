@@ -20,29 +20,6 @@
 // to display files and directories of the directory 1
 // 
 
-
-
-
-
-// int main(int ac, char **av)
-// {
-//     /*
-//     ** window/terminal size structure. 
-//     ** The winsize is accessed from the kernel
-//     */
-
-//     struct winsize w;
-
-//     /*
-//     ** 
-//     */
-//     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-
-//     ft_printf("lines %d\n", w.ws_row);
-//     ft_printf("columns %d\n", w.ws_col);
-//     return 0;
-// }
-
 void app_init(t_app *app)
 {
 	struct	winsize w;
@@ -78,7 +55,6 @@ int main(int argc, char **argv)
 
 	i = 1;
 	app_init(&app);
-
 	if (argc >= 2)
 	{ 
 		i = check_active_option_ls(&app, argc, argv);

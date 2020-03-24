@@ -27,39 +27,24 @@ void add_data_to_tree(t_tree **ls_tree, t_dirent *dir_entry,
 	int (*f)(t_dirent *d1, t_dirent *d2))
 {
 	if (!*ls_tree)
-	{
 		init_tree(ls_tree, new_node(dir_entry));
-	}
 	else
-	{
 		addnode_tree((*ls_tree)->root, new_node(dir_entry), f);
-	}
 }
 
 void	setting_tree_ls(t_app *app, t_tree **ls_tree, t_dirent *dir_entry)
 {
 	if (app->option_ch[3] == 1 && !app->option_ch[4])
-	{
 		add_data_to_tree(ls_tree, dir_entry, rev_alphanum_comp);
-	}
 	else if (app->option_ch[4] && !app->option_ch[3])
-	{
 		add_data_to_tree(ls_tree, dir_entry, file_date_comp);
-		// ft_printf(" order by current modified date\n");
-	}
 	else if (app->option_ch[4] && app->option_ch[3])
-	{
 		add_data_to_tree(ls_tree, dir_entry, rev_file_date_comp);
-		// ft_printf(" order by reverser current modified date\n");
-	}
 	else
-	{
 		add_data_to_tree(ls_tree, dir_entry, alphanum_comp);
-	}
 }
 
 //CHECKPOINT: DEBUG THE RECURSIVE WITH r
-
 void	recursive_ls(t_app *app, t_tree *ls_tree, char *cur_direct)
 {
 	t_list *dir_list;
@@ -71,16 +56,14 @@ void	recursive_ls(t_app *app, t_tree *ls_tree, char *cur_direct)
 	while(dir_list)
 	{
 		ft_printf("%s:\n", dir_list->content);
-		ft_ls(app,dir_list->content);
+		ft_ls(app, dir_list->content);
 		dir_list = dir_list->next;
 	}
-	// free_binary_tree(dir_tree->root);
 	//free list
 	// while(hold)
 	// {
 
 	// }
-
 }
 
 int		ft_ls(t_app *app, char *cur_direct)
