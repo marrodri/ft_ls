@@ -31,7 +31,9 @@ typedef struct	s_tree_node
 	void				*parent;
 	void				*data;
 	int					use_free_on_data;
-	int					node_on_list;
+	int					node_checked;
+	// int					node_left_check;
+	// int					node_right_check;
 	struct s_tree_node	*left;
 	struct s_tree_node	*right;
 }				t_tree_node;
@@ -125,5 +127,6 @@ void		print_inorder_tree(t_tree_node *curr);
 void		free_binary_tree(t_tree_node *root);
 void		binary_tree_to_list(t_tree_node *root, t_list **alist);
 void		print_list(t_list *list);
+void 		directories_to_list(t_tree_node *root, t_list **dir_list, char *cur_direct);
 
 #endif
