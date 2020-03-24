@@ -33,7 +33,7 @@ int	 file_date_comp(t_dirent *dir1, t_dirent *dir2)
 	// s1.st_ctime;
 
 	//check what is the st_ctime and how it works
-	return ((s1.st_ctime - s2.st_ctime) < 0);
+	return ((s1.st_mtime - s2.st_mtime) < 0);
 }
 
 // when rt flags are used
@@ -56,5 +56,5 @@ int rev_file_date_comp(t_dirent *dir1, t_dirent *dir2)
 	// s1.st_ctime;
 
 	//check what is the st_ctime and how it works
-	return ((s1.st_ctime - s2.st_ctime) > 0);
+	return ((s1.st_mtime - s2.st_mtime) > 0);
 }

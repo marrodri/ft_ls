@@ -38,7 +38,7 @@ void add_data_to_tree(t_tree **ls_tree, t_dirent *dir_entry,
 
 void	setting_tree_ls(t_app *app, t_tree **ls_tree, t_dirent *dir_entry)
 {
-	if (app->option_ch[3] == 1)
+	if (app->option_ch[3] == 1 && !app->option_ch[4])
 	{
 		add_data_to_tree(ls_tree, dir_entry, rev_alphanum_comp);
 	}
