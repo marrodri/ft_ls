@@ -37,6 +37,7 @@ void	ls_output(t_app *app, t_tree *file_tree)
 	}
 	else
 	{
-		print_inorder_tree(file_tree->root);
+		print_content_tree(file_tree->root, print_dirent);
+		//print_inorder_tree(file_tree->root);
 	}
 }

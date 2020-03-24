@@ -73,7 +73,7 @@ void print_inorder_tree(t_tree_node *curr)
 			print_inorder_tree(curr->right); 
 		}
 	}
-		return ;
+	return ;
 }
 
 void free_binary_tree(t_tree_node *root)
@@ -115,10 +115,12 @@ t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node, int (*f)(t_diren
 		if (f(curr->data, node->data))
 		{
 			curr->left = addnode_tree(curr->left, node, f);
+			curr->left->parent = curr;
 		}
 		else
 		{
 			curr->right = addnode_tree(curr->right, node, f);
+			curr->right->parent = curr;
 		}
 		return (curr);
 	}
