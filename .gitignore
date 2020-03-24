@@ -2,3 +2,5 @@
 a.out.dSYM/
 trash/
 test_*.txt
+output.txt
+test_output.txt

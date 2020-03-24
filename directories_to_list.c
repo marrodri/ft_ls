@@ -39,6 +39,7 @@ void	add_directory_to_list(t_list **dir_list, char *cur_direct, t_dirent *dir_en
 		free(append_dir);
 }
 
+//debug here
 void directories_to_list(t_tree_node *root, t_list **dir_list, char *cur_direct)
 {
 	// t_list *new_dir_list;

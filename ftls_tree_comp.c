@@ -14,6 +14,7 @@ int rev_alphanum_comp(t_dirent *d1, t_dirent *d2)
 }
 
 // t flag use this comp
+// add the current path to this function for the Rt flag
 int	 file_date_comp(t_dirent *dir1, t_dirent *dir2)
 {
 	//stat, lstat

@@ -59,6 +59,7 @@ void	setting_tree_ls(t_app *app, t_tree **ls_tree, t_dirent *dir_entry)
 }
 
 //CHECKPOINT: DEBUG THE RECURSIVE WITH r
+
 void	recursive_ls(t_app *app, t_tree *ls_tree, char *cur_direct)
 {
 	t_list *dir_list;
@@ -92,7 +93,6 @@ int		ft_ls(t_app *app, char *cur_direct)
 	len = 0;
 	app->hi_len = 0;
 	ls_tree = NULL;
-	// dir_list = NULL;
 	/*
 	** opendir: open directory descriptor 
 	** (simliar to file descriptor, instead with directories)
