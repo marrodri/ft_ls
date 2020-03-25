@@ -4,3 +4,5 @@ trash/
 test_*.txt
 output.txt
 test_output.txt
+notes.txt
+diff.txt

@@ -12,70 +12,6 @@
 
 #include "ft_ls.h"
 
-void print_inorder_str_tree(t_tree_node *curr)
-{
-	char *str;
-
-	if(!curr)
-	{
-		ft_printf("NULL\n");
-		return ;
-	}
-	str = curr->data;
-	if (!curr->left && !curr->right)
-	{
-		ft_printf("%s\n", str);
-		return ;
-	}
-	else if(curr)
-	{
-		if (curr->left)
-		{
-			print_inorder_tree(curr->left); 
-		}
-		str = curr->data;
-		if(curr)
-			ft_printf("%s\n", str);
-		if(curr->right)
-		{
-			print_inorder_tree(curr->right); 
-		}
-	}
-		return ;
-}
-
-void print_inorder_tree(t_tree_node *curr)
-{
-	t_dirent *dirent;
-
-	if(!curr)
-	{
-		ft_printf("NULL\n");
-		return ;
-	}
-	dirent = curr->data;
-	if (!curr->left && !curr->right)
-	{
-		ft_printf("%s\n", dirent->d_name);
-		return ;
-	}
-	else if(curr)
-	{
-		if (curr->left)
-		{
-			print_inorder_tree(curr->left); 
-		}
-		dirent = curr->data;
-		if(curr)
-			ft_printf("%s\n", dirent->d_name);
-		if(curr->right)
-		{
-			print_inorder_tree(curr->right); 
-		}
-	}
-	return ;
-}
-
 void free_binary_tree(t_tree_node *root)
 {
 	if (!(root)->left && !(root)->right)
@@ -157,7 +93,6 @@ void print_list(t_list *list)
 		ft_printf("%s\n", list->content);
 		list = list->next;
 	}
-
 }
 
 void set_tree_node_to_list(t_tree_node *tnode, t_list **alist)
@@ -208,37 +143,3 @@ void binary_tree_to_list(t_tree_node *root, t_list **alist)
 
 // NOTE THIS LEAKS IN PRINTF, FIND A WAY TO CLEAR ITS LEAKS
 // 	printf("%12s\n", "hello world", 213);
-
-// int main()
-// {
-// 	char *a = "output.txt";
-// 	char *b = "test_output.txt";
-// 	char *c = "libft";
-// 	char *d = "ans_output.txt";
-// 	char *e = "Main";
-// 	char *f = "ft_ls.h";
-// 	char *g = "main.c";
-// 	char *h = "a.out";
-
-// 	t_tree *tree;
-// 	t_tree_node *n1 = new_node(a);
-// 	t_tree_node *n2 = new_node(b);
-// 	t_tree_node *n3 = new_node(c);
-// 	t_tree_node *n4 = new_node(d);
-// 	t_tree_node *n5 = new_node(e);
-// 	t_tree_node *n6 = new_node(f);
-// 	t_tree_node *n7 = new_node(g);
-// 	t_tree_node *n8 = new_node(h);
-// 	init_tree(&tree, n1);
-// 	tree->root = addnode_tree(tree->root, n2);
-// 	tree->root = addnode_tree(tree->root, n3);
-// 	tree->root = addnode_tree(tree->root, n4);
-// 	tree->root = addnode_tree(tree->root, n5);
-// 	tree->root = addnode_tree(tree->root, n6);
-// 	tree->root = addnode_tree(tree->root, n7);
-// 	tree->root = addnode_tree(tree->root, n8);
-
-	
-// 	print_inorder_tree(tree->root);
-// 	return 0;
-// }

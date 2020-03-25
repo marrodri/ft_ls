@@ -90,9 +90,6 @@ void	print_parent_tree(t_tree_node *curr, void *f(void *));
 void	*print_string(void *addr_str);
 void	*print_dirent(void *addr_dirent);
 
-
-// void print_inorder_str_tree(t_tree_node *curr);
-
 /*
 ** checkers-------------------------------------------------------
 */
@@ -122,7 +119,6 @@ void		init_tree(t_tree **tree, t_tree_node *node);
 t_tree_node	*new_node(void *data);
 t_tree_node	*addnode_tree(t_tree_node *curr, t_tree_node *node,
 		int (*f)(t_dirent *d1, t_dirent *d2));
-void		print_inorder_tree(t_tree_node *curr);
 void		free_binary_tree(t_tree_node *root);
 void		binary_tree_to_list(t_tree_node *root, t_list **alist);
 void		print_list(t_list *list);

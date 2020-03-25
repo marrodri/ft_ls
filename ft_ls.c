@@ -1,28 +1,6 @@
 
 #include "ft_ls.h"
 
-// int	 file_date_comp(t_dirent *dir1, t_dirent *dir2)
-// {
-// 	//stat, lstat
-// 	//time, ctime
-
-// 	char *file1;
-// 	char *file2;
-// 	struct stat s1;
-// 	struct stat s2;
-
-// 	file1 = dir1->d_name;
-// 	file2 = dir2->d_name;
-
-// 	//check how the stat, works
-// 	stat(file1, &s1);
-// 	stat(file2, &s2);
-// 	// s1.st_ctime;
-
-// 	//check what is the st_ctime and how it works
-// 	return ((s1.st_ctime - s2.st_ctime) < 0);
-// }
-
 void add_data_to_tree(t_tree **ls_tree, t_dirent *dir_entry,
 	int (*f)(t_dirent *d1, t_dirent *d2))
 {
@@ -51,7 +29,9 @@ void	recursive_ls(t_app *app, t_tree *ls_tree, char *cur_direct)
 
 	dir_list = NULL;
 	directories_to_list(ls_tree->root, &dir_list, cur_direct);
-	// print_list(dir_list);
+	ft_printf("\n============\n");
+	print_list(dir_list);
+	ft_printf("==============\n\n");
 	t_list *hold = dir_list;
 	while(dir_list)
 	{
