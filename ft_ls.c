@@ -17,14 +17,18 @@ void	setting_tree_ls(t_app *app, t_tree **ls_tree, char *cur_direct, t_dirent *d
 {
 	//rev_alphanum
 	if (app->option_ch[3] == 1 && !app->option_ch[4])
+	{
 		add_data_to_tree(ls_tree, dir_entry, cur_direct, rev_alphanum_comp);
+	}
 	else if (app->option_ch[4] && !app->option_ch[3])
 	{
+		//NOTE: ASK FOR HELP WHEN COMMING BACK
 		add_data_to_tree(ls_tree, dir_entry, cur_direct, file_date_comp);
 	}
 	else if (app->option_ch[4] && app->option_ch[3])
 	{
-		 add_data_to_tree(ls_tree, dir_entry, cur_direct, rev_file_date_comp);
+		//NOTE: ASK FOR HELP WHEN COMMING BACK
+		add_data_to_tree(ls_tree, dir_entry, cur_direct, rev_file_date_comp);
 	}	
 	else
 		add_data_to_tree(ls_tree, dir_entry, cur_direct, alphanum_comp);
@@ -34,27 +38,23 @@ void	setting_tree_ls(t_app *app, t_tree **ls_tree, char *cur_direct, t_dirent *d
 void	recursive_ls(t_app *app, t_tree *ls_tree, char *cur_direct)
 {
 	t_list *dir_list;
-
-	dir_list = NULL;
-	// ft_printf("ls tree showing output+++++\n");
-	// ls_output(app, ls_tree);
-	// ft_printf("++++++++++++++++++++++++++\n");
-	directories_to_list(ls_tree->root, &dir_list, cur_direct);
-	// ft_printf("\n============\n");
-	// print_list(dir_list);
-	// ft_printf("==============\n\n");
-	t_list *hold = dir_list;
-	while(dir_list)
+	if(ls_tree)
 	{
-		// ft_printf("%s:\n", dir_list->content);
-		ft_ls(app, dir_list->content);
-		dir_list = dir_list->next;
-	}
-	//free list
-	// while(hold)
-	// {
 
-	// }
+		dir_list = NULL;
+		directories_to_list(ls_tree->root, &dir_list, cur_direct);
+		t_list *hold = dir_list;
+		while(dir_list)
+		{
+			ft_ls(app, dir_list->content);
+			dir_list = dir_list->next;
+		}
+		//free list
+		// while(hold)
+		// {
+
+		// }
+	}
 }
 
 int		ft_ls(t_app *app, char *cur_direct)

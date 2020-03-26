@@ -45,8 +45,12 @@ void app_init(t_app *app)
 * IMPORTANT: go to var_len in ft_printf, to check how to free any leaks with str and ints and format
 
 * BUGS FOUND:
-* segfault when there is an empty folder
+* segfault when there is an empty folder with the recursive flag
 */
+
+// TODO PLANNING:
+// do the -l flag with detailed
+// dont add the .. or . flag to the dir_list with the aR options
 
 int main(int argc, char **argv)
 {
