@@ -13,12 +13,13 @@ char	*append_directory(char *cur_direct, char *append_direct)
 	return (new_dir);
 }
 
-void	add_directory_to_list(t_list **dir_list, char *cur_direct, t_dirent *dir_entry)
+void	add_directory_to_list(t_list **dir_list, char *cur_direct, char *file_name)
 {
 	char *append_dir;
 	t_list *new_node;
 	
-	append_dir = append_directory(cur_direct, dir_entry->d_name);
+	// ft_printf("dir_entry |%s|\n", file_name);
+	append_dir = append_directory(cur_direct, file_name);
 	if (is_directory(append_dir))
 	{
 		new_node = ft_lstnew(append_dir, 0);
@@ -42,6 +43,8 @@ void	add_directory_to_list(t_list **dir_list, char *cur_direct, t_dirent *dir_en
 // then iterate through the whole tree with the same steps  
 void directories_to_list(t_tree_node *root, t_list **dir_list, char *cur_direct)
 {
+	if(!root)
+		return ;
 	if (!root->left && !root->right)
 	{
 		// printf("root cont is %s\n", root->data);

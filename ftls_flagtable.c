@@ -13,8 +13,8 @@ static int	option_checker(char opt)
 	{
 		if (options[i] == opt)
 		{
-			ft_printf("option %c found\n", options[i]);	
-			ft_printf("i is %d\n", i);	
+			// ft_printf("option %c found\n", options[i]);	
+			// ft_printf("i is %d\n", i);	
 			return (i);
 		}
 		i++;
@@ -40,8 +40,8 @@ static void check_options_in_one_argv(t_app *app, char *av)
 		if ((pos = option_checker(av[i])) >= 0)
 		{
 			app->option_ch[pos] = 1;
-			ft_printf("pos is %d\n", pos);
-			ft_printf("app->option_ch[%d] is %d\n", pos, app->option_ch[pos]);
+			// ft_printf("pos is %d\n", pos);
+			// ft_printf("app->option_ch[%d] is %d\n", pos, app->option_ch[pos]);
 		}
 		i++;
 	}

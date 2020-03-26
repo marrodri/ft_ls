@@ -2,22 +2,30 @@
 #include "ft_ls.h"
 
 void add_data_to_tree(t_tree **ls_tree, t_dirent *dir_entry,
-	int (*f)(t_dirent *d1, t_dirent *d2))
+	int (*f)(char *str1, char *str2))
 {
+	char *file_name;
+
+	file_name = ft_strdup(dir_entry->d_name);
 	if (!*ls_tree)
-		init_tree(ls_tree, new_node(dir_entry));
+		init_tree(ls_tree, new_node(file_name));
 	else
-		addnode_tree((*ls_tree)->root, new_node(dir_entry), f);
+		addnode_tree((*ls_tree)->root, new_node(file_name), f);
 }
 
 void	setting_tree_ls(t_app *app, t_tree **ls_tree, t_dirent *dir_entry)
 {
+	//rev_alphanum
 	if (app->option_ch[3] == 1 && !app->option_ch[4])
 		add_data_to_tree(ls_tree, dir_entry, rev_alphanum_comp);
 	else if (app->option_ch[4] && !app->option_ch[3])
-		add_data_to_tree(ls_tree, dir_entry, file_date_comp);
+	{
+		// add_data_to_tree(ls_tree, dir_entry, file_date_comp);
+	}
 	else if (app->option_ch[4] && app->option_ch[3])
-		add_data_to_tree(ls_tree, dir_entry, rev_file_date_comp);
+	{
+		// add_data_to_tree(ls_tree, dir_entry, rev_file_date_comp);
+	}	
 	else
 		add_data_to_tree(ls_tree, dir_entry, alphanum_comp);
 }
@@ -28,14 +36,17 @@ void	recursive_ls(t_app *app, t_tree *ls_tree, char *cur_direct)
 	t_list *dir_list;
 
 	dir_list = NULL;
+	// ft_printf("ls tree showing output+++++\n");
+	// ls_output(app, ls_tree);
+	// ft_printf("++++++++++++++++++++++++++\n");
 	directories_to_list(ls_tree->root, &dir_list, cur_direct);
-	ft_printf("\n============\n");
-	print_list(dir_list);
-	ft_printf("==============\n\n");
+	// ft_printf("\n============\n");
+	// print_list(dir_list);
+	// ft_printf("==============\n\n");
 	t_list *hold = dir_list;
 	while(dir_list)
 	{
-		ft_printf("%s:\n", dir_list->content);
+		// ft_printf("%s:\n", dir_list->content);
 		ft_ls(app, dir_list->content);
 		dir_list = dir_list->next;
 	}
@@ -75,7 +86,7 @@ int		ft_ls(t_app *app, char *cur_direct)
 		if ('.' != dir_entry->d_name[0] || app->option_ch[1])
 			setting_tree_ls(app, &ls_tree, dir_entry);
 	}
-	ls_output(app, ls_tree);
+	ls_output(app, ls_tree, cur_direct);
 	closedir(dir_stream);
 	if (app->option_ch[0])
 		recursive_ls(app, ls_tree, cur_direct);

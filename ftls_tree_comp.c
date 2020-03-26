@@ -2,15 +2,15 @@
 #include "ft_ls.h"
 
 //default comparison
-int alphanum_comp(t_dirent *d1, t_dirent *d2)
+int alphanum_comp(char *str1, char *str2)
 {
-	return (ft_strcmp(d1->d_name, d2->d_name) > 0);
+	return (ft_strcmp(str1, str2) > 0);
 }
 
 // r flag use this comp
-int rev_alphanum_comp(t_dirent *d1, t_dirent *d2)
+int rev_alphanum_comp(char *str1, char *str2)
 {
-	return (ft_strcmp(d1->d_name, d2->d_name) < 0);
+	return (ft_strcmp(str1, str2) < 0);
 }
 
 // t flag use this comp

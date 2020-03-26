@@ -17,19 +17,19 @@ void *print_dirent(void *addr_dirent)
 	return (0);
 }
 
-// void *print_string(void *addr_str)
-// {
-// 	char *str;
+void *print_string(void *addr_str)
+{
+	char *str;
 
-// 	str = addr_str;
-// 	if (!str)
-// 	{
-// 		ft_printf("NULL\n");
-// 		return (0);
-// 	}
-// 	ft_printf("|%s|\n", str);
-// 	return (0);
-// }
+	str = addr_str;
+	if (!str)
+	{
+		ft_printf("NULL\n");
+		return (0);
+	}
+	ft_printf("%s\n", str);
+	return (0);
+}
 
 
 void print_parent_tree(t_tree_node *curr, void *f(void *))

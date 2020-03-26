@@ -40,7 +40,7 @@ void free_binary_tree(t_tree_node *root)
 
 //add comparison
 // t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node)
-t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node, int (*f)(t_dirent *d1, t_dirent *d2))
+t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node, int (*f)(char *str1, char *str2))
 {
 	if (curr == NULL)
 	{

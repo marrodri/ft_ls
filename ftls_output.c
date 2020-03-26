@@ -29,17 +29,21 @@ void	ls_detailed_output(t_tree *file_tree)
 	ft_printf("detailed output here\n");
 }
 
-void	ls_output(t_app *app, t_tree *ls_tree)
+void	ls_output(t_app *app, t_tree *ls_tree, char *cur_direct)
 {
 	if(ls_tree)
 	{
+		if(app->option_ch[0])
+		{
+			ft_printf("%s:\n", cur_direct);
+		}
 		if(app->option_ch[2])
 		{
 			ls_detailed_output(ls_tree);
 		}
 		else
 		{
-			print_content_tree(ls_tree->root, print_dirent);
+			print_content_tree(ls_tree->root, print_string);
 			//print_inorder_tree(file_tree->root);
 		}
 		ft_printf("\n");

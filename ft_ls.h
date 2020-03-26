@@ -84,7 +84,8 @@ int check_active_option_ls(t_app *app, int ac, char **av);
 ** list output----------------------------------------------------
 */
 
-void	ls_output(t_app *app, t_tree *file_tree);
+// void	ls_output(t_app *app, t_tree *file_tree);
+void	ls_output(t_app *app, t_tree *ls_tree, char *cur_direct);
 void	print_content_tree(t_tree_node *curr, void *f(void *));
 void	print_parent_tree(t_tree_node *curr, void *f(void *));
 void	*print_string(void *addr_str);
@@ -107,18 +108,22 @@ char		**ft_sortwords(char **words, int (*f)(char *a, char *b));
 ** binary tree comparisons-------------------------------------------
 */
 
-int		alphanum_comp(t_dirent *d1, t_dirent *d2);
-int		rev_alphanum_comp(t_dirent *d1, t_dirent *d2);
+// int		alphanum_comp(t_dirent *d1, t_dirent *d2);
+// int		rev_alphanum_comp(t_dirent *d1, t_dirent *d2);
 int		file_date_comp(t_dirent *dir1, t_dirent *dir2);
 int		rev_file_date_comp(t_dirent *dir1, t_dirent *dir2);
+
+int rev_alphanum_comp(char *str1, char *str2);
+int alphanum_comp(char *str1, char *str2);
 /*
 ** Binary Tree-------------------------------------------------------
 */
 
 void		init_tree(t_tree **tree, t_tree_node *node);
 t_tree_node	*new_node(void *data);
-t_tree_node	*addnode_tree(t_tree_node *curr, t_tree_node *node,
-		int (*f)(t_dirent *d1, t_dirent *d2));
+// t_tree_node	*addnode_tree(t_tree_node *curr, t_tree_node *node,
+// 		int (*f)(t_dirent *d1, t_dirent *d2));
+t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node, int (*f)(char *str1, char *str2));
 void		free_binary_tree(t_tree_node *root);
 void		binary_tree_to_list(t_tree_node *root, t_list **alist);
 void		print_list(t_list *list);
