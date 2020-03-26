@@ -1,8 +1,8 @@
 
 #include "ft_ls.h"
 
-void add_data_to_tree(t_tree **ls_tree, t_dirent *dir_entry,
-	int (*f)(char *str1, char *str2))
+void add_data_to_tree(t_tree **ls_tree, t_dirent *dir_entry, char *cur_direct,
+	int (*f)(char *str1, char *str2, char *cur_direct))
 {
 	char *file_name;
 
@@ -10,24 +10,24 @@ void add_data_to_tree(t_tree **ls_tree, t_dirent *dir_entry,
 	if (!*ls_tree)
 		init_tree(ls_tree, new_node(file_name));
 	else
-		addnode_tree((*ls_tree)->root, new_node(file_name), f);
+		addnode_tree((*ls_tree)->root, new_node(file_name), cur_direct, f);
 }
 
-void	setting_tree_ls(t_app *app, t_tree **ls_tree, t_dirent *dir_entry)
+void	setting_tree_ls(t_app *app, t_tree **ls_tree, char *cur_direct, t_dirent *dir_entry)
 {
 	//rev_alphanum
 	if (app->option_ch[3] == 1 && !app->option_ch[4])
-		add_data_to_tree(ls_tree, dir_entry, rev_alphanum_comp);
+		add_data_to_tree(ls_tree, dir_entry, cur_direct, rev_alphanum_comp);
 	else if (app->option_ch[4] && !app->option_ch[3])
 	{
-		// add_data_to_tree(ls_tree, dir_entry, file_date_comp);
+		add_data_to_tree(ls_tree, dir_entry, cur_direct, file_date_comp);
 	}
 	else if (app->option_ch[4] && app->option_ch[3])
 	{
-		// add_data_to_tree(ls_tree, dir_entry, rev_file_date_comp);
+		 add_data_to_tree(ls_tree, dir_entry, cur_direct, rev_file_date_comp);
 	}	
 	else
-		add_data_to_tree(ls_tree, dir_entry, alphanum_comp);
+		add_data_to_tree(ls_tree, dir_entry, cur_direct, alphanum_comp);
 }
 
 //CHECKPOINT: DEBUG THE RECURSIVE WITH r
@@ -84,7 +84,7 @@ int		ft_ls(t_app *app, char *cur_direct)
 	while ((dir_entry = readdir(dir_stream)) != NULL)
 	{
 		if ('.' != dir_entry->d_name[0] || app->option_ch[1])
-			setting_tree_ls(app, &ls_tree, dir_entry);
+			setting_tree_ls(app, &ls_tree, cur_direct, dir_entry);
 	}
 	ls_output(app, ls_tree, cur_direct);
 	closedir(dir_stream);

@@ -78,7 +78,7 @@ typedef struct	s_app
 */
 
 int		ft_ls(t_app *app, char *cur_direct);
-int check_active_option_ls(t_app *app, int ac, char **av);
+int		check_active_option_ls(t_app *app, int ac, char **av);
 
 /*
 ** list output----------------------------------------------------
@@ -108,13 +108,18 @@ char		**ft_sortwords(char **words, int (*f)(char *a, char *b));
 ** binary tree comparisons-------------------------------------------
 */
 
-// int		alphanum_comp(t_dirent *d1, t_dirent *d2);
-// int		rev_alphanum_comp(t_dirent *d1, t_dirent *d2);
-int		file_date_comp(t_dirent *dir1, t_dirent *dir2);
-int		rev_file_date_comp(t_dirent *dir1, t_dirent *dir2);
+// int		file_date_comp(t_dirent *dir1, t_dirent *dir2, char *cur_direct);
+// int		rev_file_date_comp(t_dirent *dir1, t_dirent *dir2, char *cur_direct);
 
-int rev_alphanum_comp(char *str1, char *str2);
-int alphanum_comp(char *str1, char *str2);
+int	 	file_date_comp(char *file_name1, char *file_name2, char *cur_direct);
+int 	rev_file_date_comp(char *file_name1, char *file_name2, char *cur_direct);
+int		rev_alphanum_comp(char *str1, char *str2, char *cur_direct);
+int		alphanum_comp(char *str1, char *str2, char *cur_direct);
+
+
+
+char	*append_directory(char *cur_direct, char *append_direct);
+
 /*
 ** Binary Tree-------------------------------------------------------
 */
@@ -123,7 +128,11 @@ void		init_tree(t_tree **tree, t_tree_node *node);
 t_tree_node	*new_node(void *data);
 // t_tree_node	*addnode_tree(t_tree_node *curr, t_tree_node *node,
 // 		int (*f)(t_dirent *d1, t_dirent *d2));
-t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node, int (*f)(char *str1, char *str2));
+// t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node, int (*f)(char *str1, char *str2));
+
+t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node, 
+	char *cur_direct, int (*f)(char *str1, char *str2, char *cur_direct));
+
 void		free_binary_tree(t_tree_node *root);
 void		binary_tree_to_list(t_tree_node *root, t_list **alist);
 void		print_list(t_list *list);
