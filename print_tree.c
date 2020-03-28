@@ -31,34 +31,6 @@ void *print_string(void *addr_str)
 	return (0);
 }
 
-
-void print_parent_tree(t_tree_node *curr, void *f(void *))
-{
-	if (!curr)
-	{
-		return ;
-	}
-	if (!curr->left && !curr->right)
-	{
-		f(curr->parent);
-		return ;
-	}
-	else if (curr)
-	{
-		if (curr->left)
-		{
-			print_parent_tree(curr->left, f); 
-		}
-		if (curr)
-			f(curr->parent);
-		if (curr->right)
-		{
-			print_parent_tree(curr->right, f); 
-		}
-	}
-	return ;
-}
-
 //use this instead of print_inorder_tree
 void print_content_tree(t_tree_node *curr, void *f(void *))
 {

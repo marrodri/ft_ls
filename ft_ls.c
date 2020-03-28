@@ -2,15 +2,15 @@
 #include "ft_ls.h"
 
 void add_data_to_tree(t_tree **ls_tree, t_dirent *dir_entry, char *cur_direct,
-	int (*f)(char *str1, char *str2, char *cur_direct))
+	int (*f)(t_tree_node *file1, t_tree_node *file2))
 {
 	char *file_name;
 
 	file_name = ft_strdup(dir_entry->d_name);
 	if (!*ls_tree)
-		init_tree(ls_tree, new_node(file_name));
+		init_tree(ls_tree, new_node(file_name, cur_direct));
 	else
-		addnode_tree((*ls_tree)->root, new_node(file_name), cur_direct, f);
+		addnode_tree((*ls_tree)->root, new_node(file_name, cur_direct), f);
 }
 
 void	setting_tree_ls(t_app *app, t_tree **ls_tree, char *cur_direct, t_dirent *dir_entry)

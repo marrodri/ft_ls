@@ -8,6 +8,11 @@ void	format_output()
 	//how to do it
 	//check if the whole list can be added to one line, if it does
 	//then append each name by 2 spaces
+	//NOTE:
+	// USE listxattr, and getxattr for the ACL
+	//use getpwdid, getgr for the username 
+	//use stat for data size in bits, then if the h flag is added, add a convertor 
+	// for human readable size
 
 	//if not then with then use the calculated length of the curr width line for making blocks 
 	//	append each name with padding then a new newline, the file names are different
@@ -20,6 +25,7 @@ void	format_output()
 	// 	printf(str, words[i]);
 	// 	i++;
 	// }
+	
 }
 
 void	ls_detailed_output(t_tree *file_tree)
