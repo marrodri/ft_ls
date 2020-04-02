@@ -4,13 +4,14 @@
 //default comparison
 int alphanum_comp(t_tree_node *file1, t_tree_node *file2)
 {
-	return (ft_strcmp(file1->data, file2->data) > 0);
+	// ft_printf("setting new file\n");
+	return (ft_strcmp(file1->file_name, file2->file_name) > 0);
 }
 
 // r flag use this comp
 int rev_alphanum_comp(t_tree_node *file1, t_tree_node *file2)
 {
-	return (ft_strcmp(file1->data, file2->data) < 0);
+	return (ft_strcmp(file1->file_name, file2->file_name) < 0);
 }
 
 // t flag use this comp

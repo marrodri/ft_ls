@@ -49,7 +49,7 @@ t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node,
 	}
 	else
 	{
-		if (f(curr->data, node->data))
+		if (f(curr, node))
 		{
 			curr->left = addnode_tree(curr->left, node, f);
 		}
@@ -76,7 +76,7 @@ t_tree_node *new_node(char *file, char *cur_direct)
 	new_node = malloc(sizeof(t_tree_node));
 	file_path = append_directory(cur_direct, file);
 	stat(file_path, &stat_file);
-	new_node->data = file;
+	new_node->file_name = file;
 	new_node->file_size = stat_file.st_size;
 	new_node->mod_time = stat_file.st_mtime;
 	new_node->user_id = stat_file.st_uid;

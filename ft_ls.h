@@ -28,7 +28,8 @@ typedef struct dirent t_dirent;
 
 typedef struct	s_tree_node
 {
-	void				*data;
+	char				*data;
+	char				*file_name;
 	char				*detailed_flie;
 	char				*file_path;
 	uid_t				user_id; //getpwuid
@@ -88,9 +89,9 @@ int		check_active_option_ls(t_app *app, int ac, char **av);
 
 // void	ls_output(t_app *app, t_tree *file_tree);
 void	ls_output(t_app *app, t_tree *ls_tree, char *cur_direct);
-void	print_content_tree(t_tree_node *curr, void *f(void *));
+void	print_content_tree(t_tree_node *curr, void *f(t_tree_node *));
 void	print_parent_tree(t_tree_node *curr, void *f(void *));
-void	*print_string(void *addr_str);
+void 	*print_string(t_tree_node *file_data);
 void	*print_dirent(void *addr_dirent);
 
 /*
