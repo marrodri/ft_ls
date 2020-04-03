@@ -1,17 +1,17 @@
 
 #include "ft_ls.h"
 
-char	*append_directory(char *cur_direct, char *append_direct)
-{
-	char *new_dir;
-	char *tmp;
+// char	*append_directory(char *cur_direct, char *append_direct)
+// {
+// 	char *new_dir;
+// 	char *tmp;
 
-	new_dir = ft_strjoin(cur_direct, "/");
-	tmp = new_dir;
-	new_dir = ft_strjoin(new_dir, append_direct);
-	free(tmp);
-	return (new_dir);
-}
+// 	new_dir = ft_strjoin(cur_direct, "/");
+// 	tmp = new_dir;
+// 	new_dir = ft_strjoin(new_dir, append_direct);
+// 	free(tmp);
+// 	return (new_dir);
+// }
 
 void	add_directory_to_list(t_list **dir_list, t_file_data *file_data)
 {

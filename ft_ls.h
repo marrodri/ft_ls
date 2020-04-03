@@ -17,7 +17,7 @@
 // from unistd.h readlink
 
 typedef struct dirent t_dirent;
-
+typedef struct stat t_stat;
 
 //	-l, more detailed output
 //  -R, recursive output, ALMOST DONE, there's segfault when using recursive on the desktop
@@ -41,14 +41,6 @@ typedef struct	s_tree_node
 {
 
 	void				*data;
-	// char				*file_name;
-	// char				*detailed_flie;
-	// char				*file_path;
-	// uid_t				user_id; //getpwuid
-	// gid_t				group_id; //getgrgid
-	// time_t				mod_time;
-	// off_t				file_size;
-	// int					is_directory;
 	struct s_tree_node	*left;
 	struct s_tree_node	*right;
 }				t_tree_node;
@@ -103,9 +95,12 @@ int		check_active_option_ls(t_app *app, int ac, char **av);
 void	ls_output(t_app *app, t_tree *ls_tree, char *cur_direct);
 void	print_content_tree(t_tree_node *curr, void *f(t_file_data *));
 void	print_parent_tree(t_tree_node *curr, void *f(void *));
-void *print_string(t_file_data *file_data);
-void	*print_dirent(void *addr_dirent);
+
+
+void *print_path(t_file_data *file_data);
+void *print_file_name(t_file_data *file_data);
 void *print_l_format(t_file_data *file_data);
+
 /*
 ** checkers-------------------------------------------------------
 */
@@ -153,5 +148,4 @@ void		print_list(t_list *list);
 void 		directories_to_list(t_tree_node *root, t_list **dir_list);
 
 
-void *print_path(t_file_data *file_data);
 #endif

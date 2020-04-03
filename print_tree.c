@@ -2,22 +2,7 @@
 
 #include "ft_ls.h"
 
-// void *print_dirent(void *addr_dirent)
-// {
-// 	t_dirent *dir_entry;
-
-// 	dir_entry = addr_dirent;
-// 	ft_printf("!!dir: ");
-// 	if (!dir_entry)
-// 	{
-// 		ft_printf("NULL\n");
-// 		return (0);
-// 	}
-// 	ft_printf("|%s|\n", (char*)dir_entry->d_name);
-// 	return (0);
-// }
-
-void *print_string(t_file_data *file_data)
+void *print_file_name(t_file_data *file_data)
 {
 	char *str;
 
@@ -29,7 +14,7 @@ void *print_string(t_file_data *file_data)
 	return (0);
 }
 
-void *print_path(t_file_data *file_data)
+void *print_file_path(t_file_data *file_data)
 {
 	char *str;
 

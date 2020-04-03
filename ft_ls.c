@@ -4,7 +4,7 @@
 t_file_data *init_file_data(char *file_name, char *cur_direct)
 {
 	char		*file_path;
-	struct stat	stat_file;
+	t_stat		stat_file;
 	t_file_data *new_fd;
 
 	new_fd = malloc(sizeof(t_file_data));
@@ -16,7 +16,7 @@ t_file_data *init_file_data(char *file_name, char *cur_direct)
 	new_fd->mod_time = stat_file.st_mtime;
 	new_fd->user_id = stat_file.st_uid;
 	new_fd->group_id = stat_file.st_gid;
-	return new_fd;
+	return (new_fd);
 }
 
 
