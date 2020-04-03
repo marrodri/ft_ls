@@ -20,17 +20,19 @@ void	add_directory_to_list(t_list **dir_list, t_file_data *file_data)
 	
 	// ft_printf("dir_entry |%s|\n", file_name);
 	// append_dir = append_directory(cur_direct, file_name);
-
-	if (is_directory(file_data->file_path))
+	if(!ft_strequ("..", file_data->file_name) && !ft_strequ(".", file_data->file_name))
 	{
-		new_node = ft_lstnew(file_data->file_path, 0);
-		if (!*dir_list)
+		if (is_directory(file_data->file_path))
 		{
-			(*dir_list) = new_node;
-		}
-		else
-		{
-			ft_lstaddend(dir_list, new_node);
+			new_node = ft_lstnew(file_data->file_path, 0);
+			if (!*dir_list)
+			{
+				(*dir_list) = new_node;
+			}
+			else
+			{
+				ft_lstaddend(dir_list, new_node);
+			}
 		}
 	}
 	// else
