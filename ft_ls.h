@@ -122,13 +122,17 @@ char		**ft_sortwords(char **words, int (*f)(char *a, char *b));
 // int rev_alphanum_comp(t_tree_node *file1, t_tree_node *file2);
 // int	 file_date_comp(t_tree_node *file1, t_tree_node *file2);
 // int rev_file_date_comp(t_tree_node *file1, t_tree_node *file2);
-char	*append_directory(char *cur_direct, char *append_direct);
 
 int alphanum_comp(t_file_data *file1, t_file_data *file2);
 int rev_alphanum_comp(t_file_data *file1, t_file_data *file2);
 int	 file_date_comp(t_file_data *file1, t_file_data *file2);
 int rev_file_date_comp(t_file_data *file1, t_file_data *file2);
 
+
+
+
+char	*append_directory(char *cur_direct, char *append_direct);
+char	*file_name_l_format(t_stat *stat_file, char *file_name);
 
 /*
 ** Binary Tree-------------------------------------------------------

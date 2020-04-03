@@ -16,6 +16,7 @@ t_file_data *init_file_data(char *file_name, char *cur_direct)
 	new_fd->mod_time = stat_file.st_mtime;
 	new_fd->user_id = stat_file.st_uid;
 	new_fd->group_id = stat_file.st_gid;
+	new_fd->detailed_file = file_name_l_format(&stat_file, file_name);
 	return (new_fd);
 }
 
