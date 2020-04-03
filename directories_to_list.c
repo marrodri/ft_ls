@@ -13,16 +13,17 @@ char	*append_directory(char *cur_direct, char *append_direct)
 	return (new_dir);
 }
 
-void	add_directory_to_list(t_list **dir_list, char *cur_direct, char *file_name)
+void	add_directory_to_list(t_list **dir_list, t_file_data *file_data)
 {
-	char *append_dir;
+	// char *append_dir;
 	t_list *new_node;
 	
 	// ft_printf("dir_entry |%s|\n", file_name);
-	append_dir = append_directory(cur_direct, file_name);
-	if (is_directory(append_dir))
+	// append_dir = append_directory(cur_direct, file_name);
+
+	if (is_directory(file_data->file_path))
 	{
-		new_node = ft_lstnew(append_dir, 0);
+		new_node = ft_lstnew(file_data->file_path, 0);
 		if (!*dir_list)
 		{
 			(*dir_list) = new_node;
@@ -32,8 +33,8 @@ void	add_directory_to_list(t_list **dir_list, char *cur_direct, char *file_name)
 			ft_lstaddend(dir_list, new_node);
 		}
 	}
-	else
-		free(append_dir);
+	// else
+	// 	free(append_dir);
 }
 
 //debug here
@@ -41,7 +42,7 @@ void	add_directory_to_list(t_list **dir_list, char *cur_direct, char *file_name)
 // through each node iterated, check the d_name if its a directory or not;
 //	if it's a directory, add the name to the list, if not then free the name
 // then iterate through the whole tree with the same steps  
-void directories_to_list(t_tree_node *root, t_list **dir_list, char *cur_direct)
+void directories_to_list(t_tree_node *root, t_list **dir_list)
 {
 	if(!root)
 		return ;
@@ -50,19 +51,19 @@ void directories_to_list(t_tree_node *root, t_list **dir_list, char *cur_direct)
 		// printf("root cont is %s\n", root->data);
 		//set_tree_node_to_list(root, alist);
 		// print_list(*alist);
-		add_directory_to_list(dir_list, cur_direct, root->data);
+		add_directory_to_list(dir_list, root->data);
 		return;
 	}
 	else if (root)
 	{
 		if (root->left)
 		{
-			directories_to_list(root->left, dir_list, cur_direct);
+			directories_to_list(root->left, dir_list);
 		}
-		add_directory_to_list(dir_list, cur_direct, root->data);
+		add_directory_to_list(dir_list, root->data);
 		if (root->right)
 		{
-			directories_to_list(root->right, dir_list, cur_direct);
+			directories_to_list(root->right, dir_list);
 		}
 	}
 	return ;

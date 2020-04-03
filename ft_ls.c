@@ -11,6 +11,7 @@ t_file_data *init_file_data(char *file_name, char *cur_direct)
 	file_path = append_directory(cur_direct, file_name);
 	stat(file_path, &stat_file);
 	new_fd->file_name = file_name;
+	new_fd->file_path = file_path;
 	new_fd->file_size = stat_file.st_size;
 	new_fd->mod_time = stat_file.st_mtime;
 	new_fd->user_id = stat_file.st_uid;
@@ -22,8 +23,8 @@ t_file_data *init_file_data(char *file_name, char *cur_direct)
 void add_data_to_tree(t_tree **ls_tree, t_dirent *dir_entry, char *cur_direct,
 	int (*f)(t_file_data *file1, t_file_data *file2))
 {
-	char *file_name;
-	t_file_data *file_data;
+	char		*file_name;
+	t_file_data	*file_data;
 	
 	file_name = ft_strdup(dir_entry->d_name);
 	file_data = init_file_data(file_name, cur_direct);
@@ -62,8 +63,10 @@ void	recursive_ls(t_app *app, t_tree *ls_tree, char *cur_direct)
 	{
 
 		dir_list = NULL;
-		directories_to_list(ls_tree->root, &dir_list, cur_direct);
+		// print_content_tree(ls_tree->root, print_path);
+		directories_to_list(ls_tree->root, &dir_list);
 		t_list *hold = dir_list;
+		// print_list(dir_list);
 		while(dir_list)
 		{
 			ft_ls(app, dir_list->content);

@@ -29,6 +29,19 @@ void *print_string(t_file_data *file_data)
 	return (0);
 }
 
+void *print_path(t_file_data *file_data)
+{
+	char *str;
+
+	str = file_data->file_path;
+	if (!str)
+		ft_printf("NULL\n");
+	else
+		ft_printf("%s\n", str);
+	return (0);
+
+}
+
 void *print_l_format(t_file_data *file_data)
 {
 	char *str;

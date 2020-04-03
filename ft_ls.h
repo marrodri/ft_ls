@@ -150,6 +150,8 @@ t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node,
 void		free_binary_tree(t_tree_node *root);
 void		binary_tree_to_list(t_tree_node *root, t_list **alist);
 void		print_list(t_list *list);
-void 		directories_to_list(t_tree_node *root, t_list **dir_list, char *cur_direct);
+void 		directories_to_list(t_tree_node *root, t_list **dir_list);
 
+
+void *print_path(t_file_data *file_data);
 #endif
