@@ -41,7 +41,7 @@ void free_binary_tree(t_tree_node *root)
 //add comparison
 // t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node)
 t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node, 
-	int (*f)(t_tree_node *file1, t_tree_node *file2))
+	int (*f)(t_file_data *file1, t_file_data *file2))
 {
 	if (curr == NULL)
 	{
@@ -49,7 +49,7 @@ t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node,
 	}
 	else
 	{
-		if (f(curr, node))
+		if (f(curr->data, node->data))
 		{
 			curr->left = addnode_tree(curr->left, node, f);
 		}
@@ -67,20 +67,19 @@ void init_tree(t_tree **tree, t_tree_node *node)
 	(*tree)->root = node;
 }
 
-t_tree_node *new_node(char *file, char *cur_direct)
+t_tree_node *new_node(void *data)
 {
 	t_tree_node	*new_node;
-	char		*file_path;
-	struct stat	stat_file;
 	
 	new_node = malloc(sizeof(t_tree_node));
-	file_path = append_directory(cur_direct, file);
-	stat(file_path, &stat_file);
-	new_node->file_name = file;
-	new_node->file_size = stat_file.st_size;
-	new_node->mod_time = stat_file.st_mtime;
-	new_node->user_id = stat_file.st_uid;
-	new_node->group_id = stat_file.st_gid;
+	new_node->data = data;
+	// file_path = append_directory(cur_direct, file);
+	// stat(file_path, &stat_file);
+	// new_node->file_name = file;
+	// new_node->file_size = stat_file.st_size;
+	// new_node->mod_time = stat_file.st_mtime;
+	// new_node->user_id = stat_file.st_uid;
+	// new_node->group_id = stat_file.st_gid;
 	new_node->left = NULL;
 	new_node->right = NULL;
 	return (new_node);

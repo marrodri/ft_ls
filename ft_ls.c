@@ -1,16 +1,36 @@
 
 #include "ft_ls.h"
 
+t_file_data *init_file_data(char *file_name, char *cur_direct)
+{
+	char		*file_path;
+	struct stat	stat_file;
+	t_file_data *new_fd;
+
+	new_fd = malloc(sizeof(t_file_data));
+	file_path = append_directory(cur_direct, file_name);
+	stat(file_path, &stat_file);
+	new_fd->file_name = file_name;
+	new_fd->file_size = stat_file.st_size;
+	new_fd->mod_time = stat_file.st_mtime;
+	new_fd->user_id = stat_file.st_uid;
+	new_fd->group_id = stat_file.st_gid;
+	return new_fd;
+}
+
+
 void add_data_to_tree(t_tree **ls_tree, t_dirent *dir_entry, char *cur_direct,
-	int (*f)(t_tree_node *file1, t_tree_node *file2))
+	int (*f)(t_file_data *file1, t_file_data *file2))
 {
 	char *file_name;
-
+	t_file_data *file_data;
+	
 	file_name = ft_strdup(dir_entry->d_name);
+	file_data = init_file_data(file_name, cur_direct);
 	if (!*ls_tree)
-		init_tree(ls_tree, new_node(file_name, cur_direct));
+		init_tree(ls_tree, new_node(file_data));
 	else
-		addnode_tree((*ls_tree)->root, new_node(file_name, cur_direct), f);
+		addnode_tree((*ls_tree)->root, new_node(file_data), f);
 }
 
 void	setting_tree_ls(t_app *app, t_tree **ls_tree, char *cur_direct, t_dirent *dir_entry)

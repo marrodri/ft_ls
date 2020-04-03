@@ -2,21 +2,21 @@
 #include "ft_ls.h"
 
 //default comparison
-int alphanum_comp(t_tree_node *file1, t_tree_node *file2)
+int alphanum_comp(t_file_data *file1, t_file_data *file2)
 {
 	// ft_printf("setting new file\n");
 	return (ft_strcmp(file1->file_name, file2->file_name) > 0);
 }
 
 // r flag use this comp
-int rev_alphanum_comp(t_tree_node *file1, t_tree_node *file2)
+int rev_alphanum_comp(t_file_data *file1, t_file_data *file2)
 {
 	return (ft_strcmp(file1->file_name, file2->file_name) < 0);
 }
 
 // t flag use this comp
 // add the current path to this function for the Rt flag
-int	 file_date_comp(t_tree_node *file1, t_tree_node *file2)
+int	 file_date_comp(t_file_data *file1, t_file_data *file2)
 {
 	//stat, lstat
 	//time, ctime
@@ -44,7 +44,7 @@ int	 file_date_comp(t_tree_node *file1, t_tree_node *file2)
 }
 
 // when rt flags are used
-int rev_file_date_comp(t_tree_node *file1, t_tree_node *file2)
+int rev_file_date_comp(t_file_data *file1, t_file_data *file2)
 {
 	// char *file_path1;
 	// char *file_path2;

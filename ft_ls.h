@@ -25,18 +25,30 @@ typedef struct dirent t_dirent;
 //  -r, reverse the list order
 //  -t, sorts by modification time, from the most current
 
-
-typedef struct	s_tree_node
+typedef struct s_file_data
 {
-	char				*data;
 	char				*file_name;
-	char				*detailed_flie;
+	char				*detailed_file;
 	char				*file_path;
 	uid_t				user_id; //getpwuid
 	gid_t				group_id; //getgrgid
 	time_t				mod_time;
 	off_t				file_size;
 	int					is_directory;
+}				t_file_data;
+
+typedef struct	s_tree_node
+{
+
+	void				*data;
+	// char				*file_name;
+	// char				*detailed_flie;
+	// char				*file_path;
+	// uid_t				user_id; //getpwuid
+	// gid_t				group_id; //getgrgid
+	// time_t				mod_time;
+	// off_t				file_size;
+	// int					is_directory;
 	struct s_tree_node	*left;
 	struct s_tree_node	*right;
 }				t_tree_node;
@@ -89,11 +101,11 @@ int		check_active_option_ls(t_app *app, int ac, char **av);
 
 // void	ls_output(t_app *app, t_tree *file_tree);
 void	ls_output(t_app *app, t_tree *ls_tree, char *cur_direct);
-void	print_content_tree(t_tree_node *curr, void *f(t_tree_node *));
+void	print_content_tree(t_tree_node *curr, void *f(t_file_data *));
 void	print_parent_tree(t_tree_node *curr, void *f(void *));
-void 	*print_string(t_tree_node *file_data);
+void *print_string(t_file_data *file_data);
 void	*print_dirent(void *addr_dirent);
-
+void *print_l_format(t_file_data *file_data);
 /*
 ** checkers-------------------------------------------------------
 */
@@ -111,28 +123,29 @@ char		**ft_sortwords(char **words, int (*f)(char *a, char *b));
 ** binary tree comparisons-------------------------------------------
 */
 
-// int	 	file_date_comp(char *file_name1, char *file_name2, char *cur_direct);
-// int 	rev_file_date_comp(char *file_name1, char *file_name2, char *cur_direct);
-// int		rev_alphanum_comp(char *str1, char *str2, char *cur_direct);
-// int		alphanum_comp(char *str1, char *str2, char *cur_direct);
-
-int alphanum_comp(t_tree_node *file1, t_tree_node *file2);
-int rev_alphanum_comp(t_tree_node *file1, t_tree_node *file2);
-int	 file_date_comp(t_tree_node *file1, t_tree_node *file2);
-int rev_file_date_comp(t_tree_node *file1, t_tree_node *file2);
+// int alphanum_comp(t_tree_node *file1, t_tree_node *file2);
+// int rev_alphanum_comp(t_tree_node *file1, t_tree_node *file2);
+// int	 file_date_comp(t_tree_node *file1, t_tree_node *file2);
+// int rev_file_date_comp(t_tree_node *file1, t_tree_node *file2);
 char	*append_directory(char *cur_direct, char *append_direct);
+
+int alphanum_comp(t_file_data *file1, t_file_data *file2);
+int rev_alphanum_comp(t_file_data *file1, t_file_data *file2);
+int	 file_date_comp(t_file_data *file1, t_file_data *file2);
+int rev_file_date_comp(t_file_data *file1, t_file_data *file2);
+
 
 /*
 ** Binary Tree-------------------------------------------------------
 */
 
 void		init_tree(t_tree **tree, t_tree_node *node);
-t_tree_node *new_node(char *file, char *cur_direct);
+t_tree_node *new_node(void *data);
 // t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node, 
 // 	char *cur_direct, int (*f)(char *str1, char *str2, char *cur_direct));
 
 t_tree_node *addnode_tree(t_tree_node *curr, t_tree_node *node, 
-	int (*f)(t_tree_node *file1, t_tree_node *file2));
+	int (*f)(t_file_data *file1, t_file_data *file2));
 
 void		free_binary_tree(t_tree_node *root);
 void		binary_tree_to_list(t_tree_node *root, t_list **alist);
