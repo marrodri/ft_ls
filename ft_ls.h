@@ -29,12 +29,14 @@ typedef struct s_file_data
 {
 	char				*file_name;
 	char				*detailed_file;
+	char				*user_group_names;
 	char				*file_path;
 	uid_t				user_id; //getpwuid
 	gid_t				group_id; //getgrgid
 	time_t				mod_time;
 	off_t				file_size;
 	int					is_directory;
+	int					len_padding;
 }				t_file_data;
 
 typedef struct	s_tree_node
@@ -77,6 +79,7 @@ typedef struct	s_app
 	int		win_lines; //rows
 	char	*cur_direct;
 	char	*root_direct;
+	int		long_column_padding;
 }				t_app;
 
 

@@ -20,10 +20,41 @@ char	*append_directory(char *cur_direct, char *append_direct)
 
 char 	*format_mtime(time_t mod_time)
 {
+	struct tm *data_time;
+	char *time_format;
+	// data_time = time(&mod_time);
+	char *tmp;
 
+	time_format = ft_itoa(data_time->tm_mon);
+	tmp = time_format;
+	time_format = ft_strjoin(time_format, " ");
+	free(tmp);
+	tmp = time_format;
+	time_format = ft_strjoin(time_format, ft_itoa(data_time->tm_mday));
+	
+	free(tmp);
+	tmp = time_format;
+	time_format = ft_strjoin(time_format, " ");
+	
+	free(tmp);
+	tmp = time_format;
+	time_format = ft_strjoin(time_format, ft_itoa(data_time->tm_hour));
+
+	free(tmp);
+	tmp = time_format;
+	time_format = ft_strjoin(time_format, ":");
+	
+	free(tmp);
+	tmp = time_format;
+	time_format = ft_strjoin(time_format, ft_itoa(data_time->tm_min));
+	free(tmp);
+
+	
+	// data_time->tm_min;
+	return time_format;
 }
 
-char	*file_name_l_format(t_stat *stat_file, char *file_name)
+char	*file_name_long_format(t_stat *stat_file, char *file_name)
 {
 	//get the username, group name, and
 	struct group	*grp_cont;
@@ -33,7 +64,7 @@ char	*file_name_l_format(t_stat *stat_file, char *file_name)
 	char			*mod_date;
 	char			*tmp;
 
-	mod_date = format_mtime(stat_file->st_mtime);
+	mod_date = ctime((long int)stat_file->st_mtime);
 	data_size = (long int)stat_file->st_size;
 	grp_cont = getgrgid(stat_file->st_gid);
 	pw_cont = getpwuid(stat_file->st_uid);
@@ -50,7 +81,7 @@ char	*file_name_l_format(t_stat *stat_file, char *file_name)
 	l_formatted = ft_strjoin(l_formatted, " ");
 	free(tmp);
 	tmp = l_formatted;
-	l_formatted = ft_strjoin(l_formatted, "mod_date");
+	l_formatted = ft_strjoin(l_formatted, mod_date);
 	free(tmp);
 	tmp = l_formatted;
 	l_formatted = ft_strjoin(l_formatted, " ");
@@ -58,12 +89,5 @@ char	*file_name_l_format(t_stat *stat_file, char *file_name)
 	tmp = l_formatted;
 	l_formatted = ft_strjoin(l_formatted, file_name);
 	free(tmp);
-	// tmp = l_formatted;
-	// l_formatted = ft_strjoin(l_formatted, "\n");
-	// free(tmp);
-
-
-
 	return (l_formatted);
-
 }
