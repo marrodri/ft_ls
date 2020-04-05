@@ -27,13 +27,6 @@ void	format_output()
 	// }
 }
 
-void	ls_detailed_output(t_tree *file_tree)
-{
-	// TODO add the -l flag output function here
-	(void)file_tree;
-	ft_printf("detailed output here\n");
-}
-
 void	ls_output(t_app *app, t_tree *ls_tree, char *cur_direct)
 {
 	if(app->option_ch[0])
@@ -44,7 +37,6 @@ void	ls_output(t_app *app, t_tree *ls_tree, char *cur_direct)
 	{
 		if(app->option_ch[2])
 		{
-			ls_detailed_output(ls_tree);
 			print_content_tree(app, ls_tree->root, print_l_format);
 		}
 		else

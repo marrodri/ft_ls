@@ -11,7 +11,7 @@ char *filesize_to_string(off_t file_size)
 
 	bitsize = (long int)file_size;
 	bitsize_str = ft_llitoa_base(bitsize, 10);
-	ft_printf("%s\n", bitsize_str);
+	// ft_printf("%s\n", bitsize_str);
 	return (bitsize_str);
 }
 

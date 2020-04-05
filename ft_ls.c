@@ -99,6 +99,7 @@ int		ft_ls(t_app *app, char *cur_direct)
 
 	len = 0;
 	app->hi_len = 0;
+	app->long_column_padding = 0;
 	ls_tree = NULL;
 	/*
 	** opendir: open directory descriptor 
