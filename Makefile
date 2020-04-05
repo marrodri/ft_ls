@@ -5,7 +5,7 @@ RM = rm -f
 
 SRC = ft_binary_tree.c ft_ls.c ftls_getstatus.c ftls_tree_comp.c\
 		main.c ftls_flagtable.c ftls_output.c print_tree.c directories_to_list.c\
-		string_manipulation.c
+		string_manipulation.c long_format_setup.c
 
 OBJ = $(SRC:.c=.o)
 

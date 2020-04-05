@@ -30,7 +30,9 @@ typedef struct s_file_data
 	char				*file_name;
 	char				*detailed_file;
 	char				*user_group_names;
-	char				*file_path;
+	char				*file_path_name;
+	char				*mod_date_output;
+	char				*bits_size_output;
 	uid_t				user_id; //getpwuid
 	gid_t				group_id; //getgrgid
 	time_t				mod_time;
@@ -96,13 +98,15 @@ int		check_active_option_ls(t_app *app, int ac, char **av);
 
 // void	ls_output(t_app *app, t_tree *file_tree);
 void	ls_output(t_app *app, t_tree *ls_tree, char *cur_direct);
-void	print_content_tree(t_tree_node *curr, void *f(t_file_data *));
+
+void print_content_tree(t_app *app, t_tree_node *curr, void *f(t_file_data *, t_app *));
+// void	print_content_tree(t_tree_node *curr, void *f(t_file_data *));
 void	print_parent_tree(t_tree_node *curr, void *f(void *));
 
 
-void *print_path(t_file_data *file_data);
-void *print_file_name(t_file_data *file_data);
-void *print_l_format(t_file_data *file_data);
+void *print_path(t_file_data *file_data, t_app *app);
+void *print_file_name(t_file_data *file_data, t_app *app);
+void *print_l_format(t_file_data *file_data, t_app *app);
 
 /*
 ** checkers-------------------------------------------------------
@@ -132,10 +136,17 @@ int	 file_date_comp(t_file_data *file1, t_file_data *file2);
 int rev_file_date_comp(t_file_data *file1, t_file_data *file2);
 
 
+/*
+** Long format setup --------------------------------------------
+*/
 
 
 char	*append_directory(char *cur_direct, char *append_direct);
+char	*str_char_replace(char *str, char find, char replace);
 char	*file_name_l_format(t_stat *stat_file, char *file_name);
+char	*filesize_to_string(off_t file_size);
+char	*user_and_group_to_string(uid_t user_id, gid_t group_id);
+char	*modified_time_to_string(time_t mod_time);
 
 /*
 ** Binary Tree-------------------------------------------------------

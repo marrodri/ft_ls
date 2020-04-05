@@ -22,7 +22,7 @@
 
 void app_init(t_app *app)
 {
-	struct	winsize w;
+	struct 	winsize w;
 	int		i;
 
 	// get the window size for output

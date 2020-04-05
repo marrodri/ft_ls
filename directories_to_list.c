@@ -22,9 +22,9 @@ void	add_directory_to_list(t_list **dir_list, t_file_data *file_data)
 	// append_dir = append_directory(cur_direct, file_name);
 	if(!ft_strequ("..", file_data->file_name) && !ft_strequ(".", file_data->file_name))
 	{
-		if (is_directory(file_data->file_path))
+		if (is_directory(file_data->file_path_name))
 		{
-			new_node = ft_lstnew(file_data->file_path, 0);
+			new_node = ft_lstnew(file_data->file_path_name, 0);
 			if (!*dir_list)
 			{
 				(*dir_list) = new_node;

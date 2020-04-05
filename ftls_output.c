@@ -45,11 +45,11 @@ void	ls_output(t_app *app, t_tree *ls_tree, char *cur_direct)
 		if(app->option_ch[2])
 		{
 			ls_detailed_output(ls_tree);
-			print_content_tree(ls_tree->root, print_l_format);
+			print_content_tree(app, ls_tree->root, print_l_format);
 		}
 		else
 		{
-			print_content_tree(ls_tree->root, print_file_name);
+			print_content_tree(app, ls_tree->root, print_file_name);
 			//print_inorder_tree(file_tree->root);
 		}
 	}
