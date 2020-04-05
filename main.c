@@ -65,10 +65,24 @@ int main(int argc, char **argv)
 		i = check_active_option_ls(&app, argc, argv);
 		// set argvs to app_tree if more than 1 argv name 
 		// apart from the options argvs;
-		app.cur_direct = argv[i];
-		app.root_direct = argv[i];
+		if (!argv[i])
+		{
+			app.cur_direct = ".";
+		}
+		else
+		{
+			app.cur_direct = argv[i];
+			app.root_direct = argv[i];
+		}
 	}
-	ft_ls(&app, app.cur_direct);
-	// system("leaks a.out");
+	while (app.cur_direct)
+	{
+		ft_ls(&app, app.cur_direct);
+		if (argv[i])
+		{
+			i++;
+		}
+		app.cur_direct = argv[i];
+	}
 	return (0);
 }

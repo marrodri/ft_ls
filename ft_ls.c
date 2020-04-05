@@ -43,7 +43,7 @@ void	setting_tree_ls(t_app *app, t_tree **ls_tree, char *cur_direct, t_dirent *d
 	
 	file_name = ft_strdup(dir_entry->d_name);
 	file_data = init_file_data(file_name, cur_direct);
-	if(app->long_column_padding < file_data->l_len_padding)
+	if (app->long_column_padding < file_data->l_len_padding)
 	{
 		app->long_column_padding = file_data->l_len_padding;
 	}
@@ -69,7 +69,7 @@ void	setting_tree_ls(t_app *app, t_tree **ls_tree, char *cur_direct, t_dirent *d
 void	recursive_ls(t_app *app, t_tree *ls_tree, char *cur_direct)
 {
 	t_list *dir_list;
-	if(ls_tree)
+	if (ls_tree)
 	{
 
 		dir_list = NULL;
@@ -77,7 +77,7 @@ void	recursive_ls(t_app *app, t_tree *ls_tree, char *cur_direct)
 		directories_to_list(ls_tree->root, &dir_list);
 		t_list *hold = dir_list;
 		// print_list(dir_list);
-		while(dir_list)
+		while (dir_list)
 		{
 			ft_ls(app, dir_list->content);
 			dir_list = dir_list->next;
@@ -124,7 +124,10 @@ int		ft_ls(t_app *app, char *cur_direct)
 	closedir(dir_stream);
 	if (app->option_ch[0])
 		recursive_ls(app, ls_tree, cur_direct);
-	if(ls_tree)
+	if (ls_tree)
+	{
 		free_binary_tree(ls_tree->root);
+		free(ls_tree);
+	}
 	return (1);
 }
