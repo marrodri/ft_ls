@@ -17,18 +17,15 @@ t_file_data *init_file_data(char *file_name, char *cur_direct)
 	new_fd->user_id = stat_file.st_uid;
 	new_fd->group_id = stat_file.st_gid;
 	new_fd->detailed_file = file_name_l_format(&stat_file, file_name);
+	// new_fd->user_group_names
+	new_fd->l_len_padding = ft_libaselen((long int)new_fd->file_size, 10, 1);
 	return (new_fd);
 }
 
 
-void add_data_to_tree(t_tree **ls_tree, t_dirent *dir_entry, char *cur_direct,
+void add_data_to_tree(t_tree **ls_tree, t_file_data *file_data,
 	int (*f)(t_file_data *file1, t_file_data *file2))
 {
-	char		*file_name;
-	t_file_data	*file_data;
-	
-	file_name = ft_strdup(dir_entry->d_name);
-	file_data = init_file_data(file_name, cur_direct);
 	if (!*ls_tree)
 		init_tree(ls_tree, new_node(file_data));
 	else
@@ -38,22 +35,31 @@ void add_data_to_tree(t_tree **ls_tree, t_dirent *dir_entry, char *cur_direct,
 void	setting_tree_ls(t_app *app, t_tree **ls_tree, char *cur_direct, t_dirent *dir_entry)
 {
 	//rev_alphanum
+	char		*file_name;
+	t_file_data	*file_data;
+	
+	file_name = ft_strdup(dir_entry->d_name);
+	file_data = init_file_data(file_name, cur_direct);
+	if(app->long_column_padding < file_data->l_len_padding)
+	{
+		app->long_column_padding = file_data->l_len_padding;
+	}
 	if (app->option_ch[3] == 1 && !app->option_ch[4])
 	{
-		add_data_to_tree(ls_tree, dir_entry, cur_direct, rev_alphanum_comp);
+		add_data_to_tree(ls_tree, file_data, rev_alphanum_comp);
 	}
 	else if (app->option_ch[4] && !app->option_ch[3])
 	{
 		//NOTE: ASK FOR HELP WHEN COMMING BACK
-		add_data_to_tree(ls_tree, dir_entry, cur_direct, file_date_comp);
+		add_data_to_tree(ls_tree, file_data, file_date_comp);
 	}
 	else if (app->option_ch[4] && app->option_ch[3])
 	{
 		//NOTE: ASK FOR HELP WHEN COMMING BACK
-		add_data_to_tree(ls_tree, dir_entry, cur_direct, rev_file_date_comp);
+		add_data_to_tree(ls_tree, file_data, rev_file_date_comp);
 	}	
 	else
-		add_data_to_tree(ls_tree, dir_entry, cur_direct, alphanum_comp);
+		add_data_to_tree(ls_tree, file_data, alphanum_comp);
 }
 
 //CHECKPOINT: DEBUG THE RECURSIVE WITH r

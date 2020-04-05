@@ -36,7 +36,7 @@ typedef struct s_file_data
 	time_t				mod_time;
 	off_t				file_size;
 	int					is_directory;
-	int					len_padding;
+	int					l_len_padding;
 }				t_file_data;
 
 typedef struct	s_tree_node

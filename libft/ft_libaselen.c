@@ -12,6 +12,12 @@
 
 #include "libft.h"
 
+
+/*
+** if the f_flag is set to 0 and base 10, it will
+** count the negative character as part of the len
+*/
+
 long long int		ft_libaselen(long long int n, int base, int f_flag)
 {
 	long long int	size;

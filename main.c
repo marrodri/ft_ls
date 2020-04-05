@@ -32,6 +32,7 @@ void app_init(t_app *app)
 	app->win_col = w.ws_col;
 	app->cur_direct = ".";
 	app->root_direct = ".";
+	app->long_column_padding = 0;
 	while (i < 5)
 	{
 		app->option_ch[i] = 0;
