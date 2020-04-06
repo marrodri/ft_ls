@@ -68,6 +68,7 @@ int main(int argc, char **argv)
 		if (!argv[i])
 		{
 			app.cur_direct = ".";
+			app.root_direct = ".";
 		}
 		else
 		{
@@ -75,6 +76,8 @@ int main(int argc, char **argv)
 			app.root_direct = argv[i];
 		}
 	}
+
+	
 	while (app.cur_direct)
 	{
 		ft_ls(&app, app.cur_direct);
