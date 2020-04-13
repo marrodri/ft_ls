@@ -91,6 +91,10 @@ typedef struct	s_app
 
 int		ft_ls(t_app *app, char *cur_direct);
 int		check_active_option_ls(t_app *app, int ac, char **av);
+t_file_data *init_file_data(char *file_name, char *cur_direct);
+void add_data_to_tree(t_tree **ls_tree, t_file_data *file_data,
+	int (*f)(t_file_data *file1, t_file_data *file2));
+void	recursive_ls(t_app *app, t_tree *ls_tree, char *cur_direct);
 
 /*
 ** list output----------------------------------------------------
