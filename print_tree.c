@@ -1,8 +1,18 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_tree.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marrodri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/15 11:40:00 by marrodri          #+#    #+#             */
+/*   Updated: 2019/05/15 11:40:04 by marrodri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void *print_file_name(t_file_data *file_data, t_app *app)
+void	*print_file_name(t_file_data *file_data, t_app *app)
 {
 	char *str;
 
@@ -15,10 +25,10 @@ void *print_file_name(t_file_data *file_data, t_app *app)
 	return (0);
 }
 
-void *print_file_path(t_file_data *file_data, t_app *app)
+void	*print_file_path(t_file_data *file_data, t_app *app)
 {
 	char *str;
-	
+
 	(void)app;
 	str = file_data->file_path_name;
 	if (!str)
@@ -26,16 +36,13 @@ void *print_file_path(t_file_data *file_data, t_app *app)
 	else
 		ft_printf("%s\n", str);
 	return (0);
-
 }
 
-
-//move to one use only
-char *set_padding_format(long pad)
+char	*set_padding_format(long pad)
 {
 	char *pad_str;
 	char *tmp;
-	
+
 	pad_str = ft_itoa(pad);
 	tmp = pad_str;
 	pad_str = ft_strjoin("%", pad_str);
@@ -46,18 +53,15 @@ char *set_padding_format(long pad)
 	return (pad_str);
 }
 
-
-void *print_l_format(t_file_data *file_data, t_app *app)
+void	*print_l_format(t_file_data *file_data, t_app *app)
 {
 	char *padding_format;
-	
+
 	padding_format = set_padding_format(app->long_column_padding);
-	// str = file_data->detailed_file;
 	if (!file_data)
 		ft_printf("DATA IS NULL!!\n");
 	else
 	{
-		//setup the padding for the middle column
 		ft_printf("%d ", file_data->links);
 		ft_printf("%s ", file_data->user_group_names);
 		ft_printf(padding_format, file_data->bits_size_output);
@@ -68,8 +72,8 @@ void *print_l_format(t_file_data *file_data, t_app *app)
 	return (0);
 }
 
-//use this instead of print_inorder_tree
-void print_content_tree(t_app *app, t_tree_node *curr, void *f(t_file_data *, t_app *))
+void	print_content_tree(t_app *app, t_tree_node *curr,
+	void *f(t_file_data *, t_app *))
 {
 	if (!curr)
 		return ;
@@ -81,10 +85,10 @@ void print_content_tree(t_app *app, t_tree_node *curr, void *f(t_file_data *, t_
 	else if (curr)
 	{
 		if (curr->left)
-			print_content_tree(app, curr->left, f); 
+			print_content_tree(app, curr->left, f);
 		f(curr->data, app);
 		if (curr->right)
-			print_content_tree(app, curr->right, f); 
+			print_content_tree(app, curr->right, f);
 	}
 	return ;
 }

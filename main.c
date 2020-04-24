@@ -1,12 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marrodri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/04 15:39:44 by marrodri          #+#    #+#             */
+/*   Updated: 2020/03/04 15:39:46 by marrodri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_ls.h"
-//ALMOST
-void app_init(t_app *app)
-{
-	struct 	winsize w;
-	int		i;
 
-	// get the window size for output
+/*
+** almost
+*/
+
+void	app_init(t_app *app)
+{
+	struct winsize	w;
+	int				i;
+
 	i = 0;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 	app->hi_len = 0;
@@ -21,7 +35,7 @@ void app_init(t_app *app)
 	}
 }
 
-void 	setting_app_dir(t_app *app, char **argv, int i)
+void	setting_app_dir(t_app *app, char **argv, int i)
 {
 	if (!argv[i])
 	{
@@ -36,28 +50,23 @@ void 	setting_app_dir(t_app *app, char **argv, int i)
 }
 
 /*
-* TODO LATER:
-		// IMPORTANT: go to var_len in printf, to check how to free any leaks with str and ints and format
-* FIX FT_PRINTF WHEN FREEING AND CLEAR ALL LEAKS AS POSIBLE
-* IMPORTANT: go to var_len in ft_printf, to check how to free any leaks with str and ints and format
-*
-* BONUS:
-*	implement the h flag for human read
-*	implement for the c time
-*	implement for the d flag
-*	also try the column format
-*	ACL and extended attributes for the l flag
+** TODO LATER:
+** IMPORTANT: go to var_len in printf, to check how
+** to free any leaks with str and ints and format
+**
+** IMPORTANT: go to var_len in ft_printf,
+** to check how to free any leaks with str and ints and format
 */
 
-int main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
-	t_app           app;
-	int 			i;
+	t_app	app;
+	int		i;
 
 	i = 1;
 	app_init(&app);
 	if (argc >= 2)
-	{ 
+	{
 		i = check_active_option_ls(&app, argc, argv);
 		setting_app_dir(&app, argv, i);
 	}
@@ -65,9 +74,7 @@ int main(int argc, char **argv)
 	{
 		ft_ls(&app, app.cur_direct);
 		if (argv[i])
-		{
 			i++;
-		}
 		app.cur_direct = argv[i];
 	}
 	return (0);

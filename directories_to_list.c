@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   directories_to_list.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marrodri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/16 13:26:30 by marrodri          #+#    #+#             */
+/*   Updated: 2020/01/16 13:26:32 by marrodri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_ls.h"
-//DONE
+
 void	add_directory_to_list(t_list **dir_list, t_file_data *file_data)
 {
 	t_list *new_node;
 
-	if (!ft_strequ("..", file_data->file_name) && !ft_strequ(".", file_data->file_name))
+	if (!ft_strequ("..", file_data->file_name)
+		&& !ft_strequ(".", file_data->file_name))
 	{
 		if (is_directory(file_data->file_path_name))
 		{
@@ -18,14 +30,14 @@ void	add_directory_to_list(t_list **dir_list, t_file_data *file_data)
 	}
 }
 
-void directories_to_list(t_tree_node *root, t_list **dir_list)
+void	directories_to_list(t_tree_node *root, t_list **dir_list)
 {
 	if (!root)
 		return ;
 	if (!root->left && !root->right)
 	{
 		add_directory_to_list(dir_list, root->data);
-		return;
+		return ;
 	}
 	else if (root)
 	{

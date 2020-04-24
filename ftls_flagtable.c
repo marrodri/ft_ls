@@ -1,16 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ftls_flagtable.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marrodri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/16 13:26:30 by marrodri          #+#    #+#             */
+/*   Updated: 2020/01/16 13:26:32 by marrodri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_ls.h"
-//DONE
+
 static int	option_checker(char opt)
 {
-	int i;
-	const char options[5] = {'R','a','l','r','t'};
+	int			i;
+	const char	options[5] = {'R', 'a', 'l', 'r', 't'};
 
 	i = 0;
-	while(options[i])
+	while (options[i])
 	{
 		if (options[i] == opt)
-		{	
+		{
 			return (i);
 		}
 		i++;
@@ -18,7 +29,7 @@ static int	option_checker(char opt)
 	return (-1);
 }
 
-static void check_options_in_one_argv(t_app *app, char *av)
+static void	check_options_in_one_argv(t_app *app, char *av)
 {
 	int i;
 	int pos;
@@ -35,7 +46,7 @@ static void check_options_in_one_argv(t_app *app, char *av)
 	}
 }
 
-int check_active_option_ls(t_app *app, int ac, char **av)
+int			check_active_option_ls(t_app *app, int ac, char **av)
 {
 	int i;
 

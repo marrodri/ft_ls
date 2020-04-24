@@ -1,7 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   string_manipulation.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marrodri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/04 15:39:44 by marrodri          #+#    #+#             */
+/*   Updated: 2020/03/04 15:39:46 by marrodri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_ls.h"
 
-//move here the append directory
 char	*append_directory(char *cur_direct, char *append_direct)
 {
 	char *new_dir;
@@ -19,15 +29,11 @@ char	*str_char_replace(char *str, char find, char replace)
 	int i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
-		if(str[i] == find)
+		if (str[i] == find)
 			str[i] = replace;
 		i++;
 	}
-	return str;
+	return (str);
 }
-
-
-//TODO file name manipulation for the l format
-//BONUS: later do the ACL extensions
