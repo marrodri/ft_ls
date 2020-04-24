@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-uint32_t	swap_endian(uint32_t num)
+t_uint32	swap_endian(t_uint32 num)
 {
 	return (((num & 0x000000ff) << 24u) |
 			((num & 0x0000ff00) << 8u) |

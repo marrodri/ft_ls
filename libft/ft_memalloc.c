@@ -15,10 +15,10 @@
 void	*ft_memalloc(size_t size)
 {
 	unsigned int	i;
-	uint32_t		*str;
+	t_uint32		*str;
 
 	i = 0;
-	str = (uint32_t *)malloc(size * sizeof(uint32_t));
+	str = (t_uint32 *)malloc(size * sizeof(t_uint32));
 	while (i < size)
 	{
 		if (str == NULL)

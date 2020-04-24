@@ -12,6 +12,7 @@
 
 #include "ft_printf.h"
 #include "stdio.h"
+
 /*
 ** check leaks here, move all printf files
 */
@@ -31,7 +32,6 @@ int		var_len(char *str, int *i, va_list args)
 		return (0);
 	set_fflags(str, &(*i), &st_flag, &free_fflag);
 	tstr = (set_form(str[*i], args, st_flag, &free_tstr));
-	// printf("%d\n", free);
 	if (tstr != NULL)
 	{
 		if (tstr[0] == '\0' && str[*i] == 'c')
@@ -40,8 +40,7 @@ int		var_len(char *str, int *i, va_list args)
 		ft_putstr(tstr);
 		sum = sum + (ft_strlen(tstr));
 	}
-	// if (free_fflag == 1)
-		free(st_flag);
+	free(st_flag);
 	if (free_tstr == 1)
 		free(tstr);
 	return (sum);

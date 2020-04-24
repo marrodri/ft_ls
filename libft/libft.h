@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef u_int32_t uint32_t;
+typedef u_int32_t	t_uint32;
 
 typedef	struct		s_list
 {
@@ -109,7 +109,7 @@ long long int		ft_libaselen(long long int n, int base, int f_flag);
 long long int		ft_llideduct(long long int num);
 long long int		ft_power_of_lli(long long int n, long long int expo);
 char				*ft_ldtoa(long double ld_num, int prec);
-uint32_t			swap_endian(uint32_t num);
+t_uint32			swap_endian(t_uint32 num);
 int					ft_list_size(t_list *list);
 int					ft_check_wrd_dup(char **av);
 int					ft_arriszero(int *num, int len);

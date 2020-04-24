@@ -15,7 +15,6 @@
 t_list	*ft_lstnew(void *content, size_t content_size)
 {
 	t_list	*new_node;
-	// void	*copy;
 
 	new_node = (t_list *)malloc(sizeof(t_list));
 	if (content == NULL)
