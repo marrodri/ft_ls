@@ -12,6 +12,17 @@
 
 #include "ft_ls.h"
 
+void free_file_data(t_file_data **file_data)
+{
+	free((*file_data)->user_group_names);
+	free((*file_data)->mod_date_output);
+	free((*file_data)->file_path_name);
+	free((*file_data)->bits_size_output);
+	free((*file_data)->file_name);
+
+}
+
+
 t_file_data		*init_file_data(char *file_name, char *cur_direct)
 {
 	char		*file_path;

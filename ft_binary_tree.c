@@ -20,8 +20,13 @@
 
 void		free_binary_tree(t_tree_node *root)
 {
+	t_file_data *backup;
+
 	if (!(root)->left && !(root)->right)
 	{
+		backup = root->data;
+		free_file_data(&backup);
+		free(root->data);
 		free(root);
 		root = NULL;
 		return ;
@@ -36,6 +41,9 @@ void		free_binary_tree(t_tree_node *root)
 		{
 			free_binary_tree(root->right);
 		}
+		backup = root->data;
+		free_file_data(&backup);
+		free(root->data);
 		free(root);
 		root = NULL;
 	}

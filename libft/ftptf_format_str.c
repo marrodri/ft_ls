@@ -36,30 +36,20 @@ char	*prec_management(char *fstr, char f, t_flags *st_flags)
 
 char	*format_str(char *str, char f, t_flags *st_flags, int *free_tstr)
 {
-	if (st_flags->prec_flag == 1)
+	if(st_flags->prec_flag || !ft_arriszero(st_flags->fi_flag, 5))
 	{
+
+		if (st_flags->prec_flag == 1)
+			str = prec_management(str, f, st_flags);
+		if (st_flags->fi_flag[0] == 1)
+			str = hash_flag(str, f, st_flags);
+		if (st_flags->fi_flag[3] == 1)
+			str = plus_flag(str, f);
+		if (st_flags->fi_flag[4] == 1)
+			str = space_flag(str, f);
+		if (st_flags->fi_width > 0)
+			str = field_management(str, f, st_flags);
 		*free_tstr = 1;
-		str = prec_management(str, f, st_flags);
-	}
-	if (st_flags->fi_flag[0] == 1)
-	{
-		*free_tstr = 1;
-		str = hash_flag(str, f, st_flags);
-	}
-	if (st_flags->fi_flag[3] == 1)
-	{
-		*free_tstr = 1;
-		str = plus_flag(str, f);
-	}
-	if (st_flags->fi_flag[4] == 1)
-	{
-		*free_tstr = 1;
-		str = space_flag(str, f);
-	}
-	if (st_flags->fi_width > 0)
-	{
-		*free_tstr = 1;
-		str = field_management(str, f, st_flags);
 	}
 	return (str);
 }
