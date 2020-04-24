@@ -33,11 +33,12 @@ char *user_and_group_to_string(uid_t user_id, gid_t group_id)
 	return (user_and_group_str);
 }
 
-char *modified_time_to_string(time_t mod_time)
+char *modified_time_to_string(t_file_data *file)
 {
 	char *readable_mtime_str;
+	size_t mtime;
 
-	readable_mtime_str = ctime(&mod_time);
+	readable_mtime_str = ft_strdup(ctime(&file->mod_time));
 	readable_mtime_str = str_char_replace(readable_mtime_str, '\n', ' ');
 	return (readable_mtime_str);
 }

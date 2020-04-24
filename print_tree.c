@@ -49,7 +49,6 @@ char *set_padding_format(long pad)
 
 void *print_l_format(t_file_data *file_data, t_app *app)
 {
-	// char *str;
 	char *padding_format;
 	
 	padding_format = set_padding_format(app->long_column_padding);
@@ -59,8 +58,10 @@ void *print_l_format(t_file_data *file_data, t_app *app)
 	else
 	{
 		//setup the padding for the middle column
+		ft_printf("%d ", file_data->links);
 		ft_printf("%s ", file_data->user_group_names);
 		ft_printf(padding_format, file_data->bits_size_output);
+		free(padding_format);
 		ft_printf("%s", file_data->mod_date_output);
 		ft_printf("%s\n", file_data->file_name);
 	}

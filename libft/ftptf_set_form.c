@@ -31,7 +31,7 @@ int		check_form(char f)
 		return (-1);
 }
 
-char	*set_form(char f, va_list args, t_flags *st_flag,int *free_tstr)
+char	*set_form(char f, va_list args, t_flags *st_flag, int *free_tstr)
 {
 	int				pos;
 	t_char_form		*c_str[SPEC_FORM_SIZE];
@@ -50,7 +50,7 @@ char	*set_form(char f, va_list args, t_flags *st_flag,int *free_tstr)
 	c_str[6] = x_form;
 	c_str[7] = uppx_form;
 	c_str[8] = f_form;
-	if(pos >= 2 && pos <= 8)
+	if (pos >= 2 && pos <= 8)
 		*free_tstr = 1;
 	if (pos != -1)
 		return (c_str[pos](args, st_flag));

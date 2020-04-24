@@ -38,5 +38,5 @@ char			*ft_itoa(int n)
 		n /= 10;
 		size--;
 	}
-	return (ft_strdup(str));
+	return ((str));
 }
