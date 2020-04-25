@@ -62,7 +62,7 @@ void	*print_l_format(t_file_data *file_data, t_app *app)
 		ft_printf("DATA IS NULL!!\n");
 	else
 	{
-		ft_printf("%d ", file_data->links);
+		// ft_printf("%d ", file_data->links);
 		ft_printf("%s ", file_data->user_group_names);
 		ft_printf(padding_format, file_data->bits_size_output);
 		free(padding_format);

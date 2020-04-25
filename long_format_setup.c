@@ -22,7 +22,8 @@ char	*filesize_to_string(off_t file_size)
 	return (bitsize_str);
 }
 
-char	*user_and_group_to_string(uid_t user_id, gid_t group_id)
+
+char	*user_and_group_to_string(nlink_t links, uid_t user_id, gid_t group_id)
 {
 	char			*user_and_group_str;
 	struct group	*grp_cont;
@@ -31,8 +32,13 @@ char	*user_and_group_to_string(uid_t user_id, gid_t group_id)
 
 	grp_cont = getgrgid(group_id);
 	pw_cont = getpwuid(user_id);
-	user_and_group_str = pw_cont->pw_name;
+	user_and_group_str = ft_itoa(links);
+	tmp = user_and_group_str;
 	user_and_group_str = ft_strjoin(user_and_group_str, " ");
+	free(tmp);
+	tmp = user_and_group_str;
+	user_and_group_str = ft_strjoin(user_and_group_str, pw_cont->pw_name);
+	free(tmp);
 	tmp = user_and_group_str;
 	user_and_group_str = ft_strjoin(user_and_group_str, grp_cont->gr_name);
 	free(tmp);

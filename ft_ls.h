@@ -45,6 +45,7 @@ typedef struct	s_file_data
 	char				*file_path_name;
 	char				*mod_date_output;
 	char				*bits_size_output;
+	char				acl[10];
 	uid_t				user_id;
 	gid_t				group_id;
 	time_t				mod_time;
@@ -151,8 +152,8 @@ char			*append_directory(char *cur_direct, char *append_direct);
 char			*str_char_replace(char *str, char find, char replace);
 char			*file_name_l_format(t_stat *stat_file, char *file_name);
 char			*filesize_to_string(off_t file_size);
-char			*user_and_group_to_string(uid_t user_id, gid_t group_id);
 char			*modified_time_to_string(time_t mod_time);
+char			*user_and_group_to_string(nlink_t links, uid_t user_id, gid_t group_id);
 
 /*
 ** Binary Tree-------------------------------------------------------

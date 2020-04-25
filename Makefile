@@ -1,5 +1,18 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: marrodri <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/11/28 14:48:43 by marrodri          #+#    #+#              #
+#    Updated: 2018/12/20 22:22:07 by marrodri         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME = ft_ls
+
+CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -f
 
@@ -22,7 +35,7 @@ $(LIBFT):
 		@make -C libft
 
 $(NAME): $(LIBFT) $(OBJ)
-		@gcc $(OBJ) $(LIBFT) -o $(NAME) -g
+		@gcc $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME) -g
 
 clean:
 		@rm -rf $(OBJ)

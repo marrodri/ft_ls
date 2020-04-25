@@ -22,6 +22,9 @@ void free_file_data(t_file_data **file_data)
 
 }
 
+/*
+**CREATE THE LINK DISPLAY
+*/
 
 t_file_data		*init_file_data(char *file_name, char *cur_direct)
 {
@@ -39,7 +42,7 @@ t_file_data		*init_file_data(char *file_name, char *cur_direct)
 	new_fd->links = stat_file.st_nlink;
 	bit_size_str = filesize_to_string(stat_file.st_size);
 	new_fd->user_group_names =
-		user_and_group_to_string(stat_file.st_uid, stat_file.st_gid);
+		user_and_group_to_string(stat_file.st_nlink, stat_file.st_uid, stat_file.st_gid);
 	new_fd->l_len_padding = ft_strlen(bit_size_str);
 	new_fd->bits_size_output = bit_size_str;
 	new_fd->file_size = stat_file.st_size;

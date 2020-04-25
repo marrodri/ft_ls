@@ -37,25 +37,24 @@ void	app_init(t_app *app)
 
 void	setting_app_dir(t_app *app, char **argv, int i)
 {
-	if (!argv[i])
+	if(i >= 0)
 	{
-		app->cur_direct = ".";
-		app->root_direct = ".";
-	}
-	else
-	{
-		app->cur_direct = argv[i];
-		app->root_direct = argv[i];
+		if (!argv[i])
+		{
+			app->cur_direct = ".";
+			app->root_direct = ".";
+		}
+		else
+		{
+			app->cur_direct = argv[i];
+			app->root_direct = argv[i];
+		}
 	}
 }
 
 /*
-** TODO LATER:
-** IMPORTANT: go to var_len in printf, to check how
-** to free any leaks with str and ints and format
-**
-** IMPORTANT: go to var_len in ft_printf,
-** to check how to free any leaks with str and ints and format
+** TODO:
+** setting the flag and also add a bad flag break
 */
 
 int		main(int argc, char **argv)
@@ -68,9 +67,11 @@ int		main(int argc, char **argv)
 	if (argc >= 2)
 	{
 		i = check_active_option_ls(&app, argc, argv);
+		if(i == -1)
+			return 0;
 		setting_app_dir(&app, argv, i);
 	}
-	while (app.cur_direct)
+	while (app.cur_direct && i != -1)
 	{
 		ft_ls(&app, app.cur_direct);
 		if (argv[i])
