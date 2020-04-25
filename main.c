@@ -55,6 +55,9 @@ void	setting_app_dir(t_app *app, char **argv, int i)
 /*
 ** TODO:
 ** setting the flag and also add a bad flag break
+** BUG FOUND:
+** -Rl flag core dumped, check how to fix if its 
+** from the file_data_init or from the ftptf_form_str
 */
 
 int		main(int argc, char **argv)
