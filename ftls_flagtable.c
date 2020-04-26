@@ -17,7 +17,7 @@ void	illegal_option_error(char op)
 	ft_printf("./ft_ls: invalid option -- '%c'\n", op);
 }
 
-static int	option_checker(char *opt, int *n)
+int	option_checker(char opt)
 {
 	int			i;
 	const char	options[5] = {'R', 'a', 'l', 'r', 't'};
@@ -25,7 +25,7 @@ static int	option_checker(char *opt, int *n)
 	i = 0;
 	while (i < 5)
 	{
-		if (options[i] == opt[*n])
+		if (options[i] == opt)
 		{
 			return (i);
 		}
@@ -33,12 +33,12 @@ static int	option_checker(char *opt, int *n)
 	}
 	if(i == 5)
 	{
-		i == -1;
+		i = -1;
 	}
 	return (i);
 }
 
-static int	check_options_in_one_argv(t_app *app, char **av, int ac)
+int	check_options_in_one_argv(t_app *app, char **av, int ac)
 {
 	int i;
 	int pos;
@@ -54,15 +54,18 @@ static int	check_options_in_one_argv(t_app *app, char **av, int ac)
 		n = 1;
 		while (av[i][n] && pos != -1)
 		{
-			if ((pos = option_checker(av[i], &n)) >= 0)
+			pos = option_checker(av[i][n]);
+			if (pos >= 0)
 			{
-				if (pos != -1)
-					app->option_ch[pos] = 1;
+				app->option_ch[pos] = 1;
 			}
-			n += 1;
+			if(pos != -1)
+				n += 1;
 		}
-		i++;
+		if(pos != -1)
+			i++;
 	}
+
 	if(pos == -1)
 	{
 		illegal_option_error(av[i][n]);
@@ -73,9 +76,6 @@ static int	check_options_in_one_argv(t_app *app, char **av, int ac)
 
 int			check_active_option_ls(t_app *app, int ac, char **av)
 {
-	// int i;
-
-	// i = 1;
 	if (av[1][0] == '-')
 	{
 		return (check_options_in_one_argv(app, av, ac));

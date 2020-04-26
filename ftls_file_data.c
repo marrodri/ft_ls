@@ -14,46 +14,32 @@
 
 void free_file_data(t_file_data **file_data)
 {
-	// ft_printf("(\nFREEING FILE DATAS!!!\n");
-	// ft_printf("freeing user_group_names|%s|\n",(*file_data)->user_group_names);
-	if((*file_data)->user_group_names)
+	if ((*file_data)->user_group_names)
 	{
-
 		free((*file_data)->user_group_names);
 		(*file_data)->user_group_names = NULL;
 	}
-
-	// ft_printf("freeing mod_date_output|%s|\n",(*file_data)->mod_date_output);
-	if((*file_data)->mod_date_output)
+	if ((*file_data)->mod_date_output)
 	{
 		free((*file_data)->mod_date_output);
 		(*file_data)->mod_date_output = NULL;
 	}
-	// ft_printf("freeing file_path_name|%s|\n",(*file_data)->file_path_name);
-	if((*file_data)->file_path_name)
+	if ((*file_data)->file_path_name)
 	{
 		free((*file_data)->file_path_name);
 		(*file_data)->file_path_name = NULL;
 	}
-	// ft_printf("freeing bits_size_output|%s|\n",(*file_data)->bits_size_output);
-	if((*file_data)->bits_size_output)
+	if ((*file_data)->bits_size_output)
 	{
 		free((*file_data)->bits_size_output);
 		(*file_data)->bits_size_output = NULL;
 	}
-	// ft_printf("freeing file_name|%s|\n",(*file_data)->file_name);
-	if((*file_data)->file_name)
+	if ((*file_data)->file_name)
 	{
 		free((*file_data)->file_name);
 		(*file_data)->file_name = NULL;
 	}
-	// ft_printf("==========================!!!\n");
-
 }
-
-/*
-**CREATE THE LINK DISPLAY
-*/
 
 t_file_data		*init_file_data(char *file_name, char *cur_direct)
 {
