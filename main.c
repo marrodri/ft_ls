@@ -12,10 +12,6 @@
 
 #include "ft_ls.h"
 
-/*
-** almost
-*/
-
 void	app_init(t_app *app)
 {
 	struct winsize	w;
@@ -37,7 +33,7 @@ void	app_init(t_app *app)
 
 void	setting_app_dir(t_app *app, char **argv, int i)
 {
-	if(i >= 0)
+	if (i >= 0)
 	{
 		if (!argv[i])
 		{
@@ -52,14 +48,6 @@ void	setting_app_dir(t_app *app, char **argv, int i)
 	}
 }
 
-/*
-** TODO:
-** setting the flag and also add a bad flag break
-** BUG FOUND:
-** -Rl flag core dumped, check how to fix if its 
-** from the file_data_init or from the ftptf_form_str
-*/
-
 int		main(int argc, char **argv)
 {
 	t_app	app;
@@ -70,8 +58,8 @@ int		main(int argc, char **argv)
 	if (argc >= 2)
 	{
 		i = check_active_option_ls(&app, argc, argv);
-		if(i == -1)
-			return 0;
+		if (i == -1)
+			return (0);
 		setting_app_dir(&app, argv, i);
 	}
 	while (app.cur_direct && i != -1)

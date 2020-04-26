@@ -43,7 +43,7 @@ void	col_padding(long pad, char *cur_str)
 	int dif;
 
 	dif = pad - ft_strlen(cur_str);
-	while(dif)
+	while (dif)
 	{
 		ft_putchar(' ');
 		dif--;

@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-void free_file_data(t_file_data **file_data)
+void			free_file_data(t_file_data **file_data)
 {
 	if ((*file_data)->user_group_names)
 	{

@@ -34,13 +34,9 @@ void		free_binary_tree(t_tree_node *root)
 	else if (root)
 	{
 		if ((root)->left)
-		{
 			free_binary_tree(root->left);
-		}
 		if ((root)->right)
-		{
 			free_binary_tree(root->right);
-		}
 		backup = root->data;
 		free_file_data(&backup);
 		free(root->data);
