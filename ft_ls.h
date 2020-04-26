@@ -153,7 +153,8 @@ char			*str_char_replace(char *str, char find, char replace);
 char			*file_name_l_format(t_stat *stat_file, char *file_name);
 char			*filesize_to_string(off_t file_size);
 char			*modified_time_to_string(time_t mod_time);
-char			*user_and_group_to_string(nlink_t links, uid_t user_id, gid_t group_id);
+// char			*user_and_group_to_string(nlink_t links, uid_t user_id, gid_t group_id);
+char			*user_and_group_to_string(uid_t user_id, gid_t group_id);
 
 /*
 ** Binary Tree-------------------------------------------------------
